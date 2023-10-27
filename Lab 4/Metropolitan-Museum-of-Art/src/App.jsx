@@ -15,9 +15,12 @@ const App = () =>{
        <header className='App-header'>
         <img src={logo} className='App-logo' alt = 'logo' />
         <h1 className= 'App-Title'> Welcome to the Metropolitan Museum of Art</h1>
-        <Link className='ArtLink' to='/collection/page'>
-          Arts
-        </Link>
+        <div className='center-button'>
+            <Link className='ArtLink' to='/collection/page/1'>
+             Arts
+            </Link>
+        </div>
+
        </header>
        <br/>
        <br/>

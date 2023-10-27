@@ -84,7 +84,7 @@ function Art(props) {
       />
       <CardMedia
         component='img'
-        image={artData.primaryImage}
+        image={artData.primaryImage || (artData.additionalImages && artData.additionalImages.length > 0 ? artData.additionalImages[0] : noImage)}
         title={artData.title}
       />
 
@@ -100,44 +100,44 @@ function Art(props) {
         >
           <dl>
             <p>
-              <dt className='title'>Object ID:</dt>
-              <dd>{artData.objectID}</dd>
+              <dt className='title'>Artist Name</dt>
+              <dd>{artData.artistDisplayName}</dd>
             </p>
             <p>
-              <dt className='title'>Accession Number:</dt>
-              <dd>{artData.accessionNumber}</dd>
+              <dt className='title'>Artist Bio:</dt>
+              <dd>{artData.artistDisplayBio}</dd>
             </p>
             <p>
-              <dt className='title'>Accession Year:</dt>
-              <dd>{artData.accessionYear}</dd>
+              <dt className='title'>Artist Gender:</dt>
+              <dd>{artData.artistGender || 'N/A'}</dd>
             </p>
             <p>
-              <dt className='title'>Public Domain:</dt>
-              <dd>{artData.isPublicDomain ? 'Yes' : 'No'}</dd>
+              <dt className='title'>Object Date:</dt>
+              <dd>{artData.objectDate}</dd>
             </p>
             <p>
               <dt className='title'>Department:</dt>
               <dd>{artData.department}</dd>
             </p>
             <p>
-              <dt className='title'>Object Name:</dt>
-              <dd>{artData.objectName}</dd>
+              <dt className='title'>Medium:</dt>
+              <dd>{artData.medium}</dd>
+            </p>
+            <p>
+              <dt className='title'>Classification:</dt>
+              <dd>{artData.classification}</dd>
             </p>
             <p>
               <dt className='title'>Culture:</dt>
               <dd>{artData.culture}</dd>
             </p>
             <p>
-              <dt className='title'>Date:</dt>
-              <dd>{artData.objectDate}</dd>
+              <dt className='title'>Dimensions:</dt>
+              <dd>{artData.dimensions || 'N/A'}</dd>
             </p>
             <p>
               <dt className='title'>Medium:</dt>
               <dd>{artData.medium}</dd>
-            </p>
-            <p>
-              <dt className='title'>Dimensions:</dt>
-              <dd>{artData.dimensions}</dd>
             </p>
             <p>
               <dt className='title'>Credit Line:</dt>

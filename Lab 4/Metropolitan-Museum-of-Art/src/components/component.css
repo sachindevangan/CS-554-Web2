@@ -1,0 +1,22 @@
+.collection-page {
+    padding: 20px;
+  }
+  
+  .pagination-buttons {
+    margin-top: 20px;
+  }
+  
+  .pagination-buttons a {
+    margin-right: 10px;
+    padding: 10px 20px;
+    background-color: #960b65;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .pagination-buttons a:hover {
+    background-color: #4b0f04;
+  }
+  

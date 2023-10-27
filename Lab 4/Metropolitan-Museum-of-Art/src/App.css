@@ -8,11 +8,12 @@ App {
 	width: 50%;
 }
 .App-logo {
-	height: 80px;
+	height: 90px;
 }
 
+/* searchterm */
 input {
-	border: 1px solid #1e8678;
+	border: 2px solid #1e8678;
 }
 .show-body {
 	display: block;
@@ -101,10 +102,11 @@ ul a:hover {
 ul {
 	list-style: none;
 }
-
+ 
+/* particular art title */
 .title {
 	font-weight: bold;
-	color: #1e8678;
+	color: #0b7532fd;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
@@ -128,3 +130,22 @@ dd {
 	display: inline;
 	margin-left: 5px;
 }
+
+.ArtLink {
+	background-color: white; /* Background color of the button */
+	color: black; /* Text color of the button */
+	text-decoration: none; /* Remove underline from the link text */
+	padding: 10px 20px; /* Padding inside the button */
+	border-radius: 5px; /* Border radius for rounded corners */
+	transition: background-color 0.3s ease; /* Smooth transition for background color */
+  }
+  
+  .ArtLink:hover {
+	background-color: #155e52; /* Background color when hovering over the button */
+  }
+ 
+  .center-button {
+	text-align: center;
+	margin-top: 20px; /* Adjust the margin as needed */
+  }
+  

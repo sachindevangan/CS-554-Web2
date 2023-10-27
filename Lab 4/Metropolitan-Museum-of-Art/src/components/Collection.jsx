@@ -281,103 +281,249 @@
 
 
 
-// // import React, { useState, useEffect } from 'react';
-// // import { Link, useParams } from 'react-router-dom';
-// // import axios from 'axios';
-// // import ArtListCard from './ArtListCard';
-// // import { Grid } from '@mui/material';
-// // import SearchArts from './SearchArts'; // Import the SearchArts component
+// import React, { useState, useEffect } from 'react';
+// import { Link, useParams } from 'react-router-dom';
+// import axios from 'axios';
+// import ArtListCard from './ArtListCard';
+// import { Grid } from '@mui/material';
+// import SearchArts from './SearchArts'; // Import the SearchArts component
 
-// // const CollectionPage = () => {
-// //   const { page } = useParams();
-// //   const [objects, setObjects] = useState([]);
-// //   const [loading, setLoading] = useState(true);
-// //   const [totalPages, setTotalPages] = useState(1);
-// //   const [currentPage, setCurrentPage] = useState(page ? parseInt(page) : 1);
-// //   const [searchTerm, setSearchTerm] = useState('');
+// const CollectionPage = () => {
+//   const { page } = useParams();
+//   const [objects, setObjects] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const [totalPages, setTotalPages] = useState(1);
+//   const [currentPage, setCurrentPage] = useState(page ? parseInt(page) : 1);
+//   const [searchTerm, setSearchTerm] = useState('');
 
-// //   useEffect(() => {
-// //     const fetchObjectsForPage = async () => {
-// //       try {
-// //         setLoading(true);
-// //         let apiUrl = `https://collectionapi.metmuseum.org/public/collection/v1/objects?offset=${(currentPage - 1) * 50}&limit=50`;
-// //         if (searchTerm) {
-// //           apiUrl = `https://collectionapi.metmuseum.org/public/collection/v1/search?q=${searchTerm}`;
-// //         }
-// //         const response = await axios.get(apiUrl);
-// //         const totalObjects = response.data.total;
-// //         const calculatedTotalPages = Math.ceil(totalObjects / 50);
-// //         setTotalPages(calculatedTotalPages);
-// //         setObjects(response.data.objectIDs);
-// //         setLoading(false);
-// //       } catch (error) {
-// //         console.error('Error fetching objects:', error);
-// //         setLoading(false);
-// //       }
-// //     };
+//   useEffect(() => {
+//     const fetchObjectsForPage = async () => {
+//       try {
+//         setLoading(true);
+//         let apiUrl = `https://collectionapi.metmuseum.org/public/collection/v1/objects?offset=${(currentPage - 1) * 50}&limit=50`;
+//         if (searchTerm) {
+//           apiUrl = `https://collectionapi.metmuseum.org/public/collection/v1/search?q=${searchTerm}`;
+//         }
+//         const response = await axios.get(apiUrl);
+//         const totalObjects = response.data.total;
+//         const calculatedTotalPages = Math.ceil(totalObjects / 50);
+//         setTotalPages(calculatedTotalPages);
+//         setObjects(response.data.objectIDs);
+//         setLoading(false);
+//       } catch (error) {
+//         console.error('Error fetching objects:', error);
+//         setLoading(false);
+//       }
+//     };
 
-// //     fetchObjectsForPage();
-// //   }, [currentPage, searchTerm]);
+//     fetchObjectsForPage();
+//   }, [currentPage, searchTerm]);
 
-// //   useEffect(() => {
-// //     const fetchObjectsWithSearch = async () => {
-// //       try {
-// //         setLoading(true);
-// //         const apiUrl = `https://collectionapi.metmuseum.org/public/collection/v1/search?q=${searchTerm}`;
-// //         const response = await axios.get(apiUrl);
-// //         const totalObjects = response.data.total;
-// //         const calculatedTotalPages = Math.ceil(totalObjects / 50);
-// //         setTotalPages(calculatedTotalPages);
-// //         setObjects(response.data.objectIDs);
-// //         setLoading(false);
-// //       } catch (error) {
-// //         console.error('Error fetching objects with search:', error);
-// //         setLoading(false);
-// //       }
-// //     };
+//   useEffect(() => {
+//     const fetchObjectsWithSearch = async () => {
+//       try {
+//         setLoading(true);
+//         const apiUrl = `https://collectionapi.metmuseum.org/public/collection/v1/search?q=${searchTerm}`;
+//         const response = await axios.get(apiUrl);
+//         const totalObjects = response.data.total;
+//         const calculatedTotalPages = Math.ceil(totalObjects / 50);
+//         setTotalPages(calculatedTotalPages);
+//         setObjects(response.data.objectIDs);
+//         setLoading(false);
+//       } catch (error) {
+//         console.error('Error fetching objects with search:', error);
+//         setLoading(false);
+//       }
+//     };
 
-// //     if (searchTerm) {
-// //       fetchObjectsWithSearch();
-// //     } else {
-// //       setCurrentPage(1);
-// //     }
-// //   }, [searchTerm]);
+//     if (searchTerm) {
+//       fetchObjectsWithSearch();
+//     } else {
+//       setCurrentPage(1);
+//     }
+//   }, [searchTerm]);
 
-// //   const handleSearch = (value) => {
-// //     setSearchTerm(value);
-// //   };
+//   const handleSearch = (value) => {
+//     setSearchTerm(value);
+//   };
 
-// //   return (
-// //     <div>
-// //       <h1>Collections - Page {currentPage}</h1>
-// //       <SearchArts searchValue={handleSearch} />
+//   return (
+//     <div>
+//       <h1>Collections - Page {currentPage}</h1>
+//       <SearchArts searchValue={handleSearch} />
 
-// //       {loading && <p>Loading...</p>}
-// //       {!loading && objects.length === 0 && <p>No objects found.</p>}
-// //       {!loading && objects.length > 0 && (
-// //         <div>
-// //           <Grid container spacing={2}>
-// //             {objects.slice(0, 50).map((objectID) => (
-// //               <ArtListCard key={objectID} objectID={objectID} />
-// //             ))}
-// //           </Grid>
-// //           {currentPage > 1 && <Link to={`/collection/page/${currentPage - 1}`}>Previous</Link>}
-// //           {currentPage < totalPages && <Link to={`/collection/page/${currentPage + 1}`}>Next</Link>}
-// //         </div>
-// //       )}
-// //     </div>
-// //   );
-// // };
+//       {loading && <p>Loading...</p>}
+//       {!loading && objects.length === 0 && <p>No objects found.</p>}
+//       {!loading && objects.length > 0 && (
+//         <div>
+//           <Grid container spacing={2}>
+//             {objects.slice(0, 50).map((objectID) => (
+//               <ArtListCard key={objectID} objectID={objectID} />
+//             ))}
+//           </Grid>
+//           {currentPage > 1 && <Link to={`/collection/page/${currentPage - 1}`}>Previous</Link>}
+//           {currentPage < totalPages && <Link to={`/collection/page/${currentPage + 1}`}>Next</Link>}
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
 
-// // export default CollectionPage;
+// export default CollectionPage;
 
+
+// import React, { useState, useEffect } from 'react';
+// import { Link, useParams } from 'react-router-dom';
+// import axios from 'axios';
+// import ArtListCard from './ArtListCard';
+// import { Grid } from '@mui/material';
+// import SearchArts from './SearchArts'; // Import the SearchArts component
+
+// const CollectionPage = () => {
+//   const { page } = useParams();
+//   const [objects, setObjects] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const [totalPages, setTotalPages] = useState(1);
+//   const [currentPage, setCurrentPage] = useState(page ? parseInt(page) : 1);
+//   const [searchTerm, setSearchTerm] = useState('');
+
+//   useEffect(() => {
+//     const fetchObjectsForPage = async () => {
+//       try {
+//         setLoading(true);
+//         let apiUrl = `https://collectionapi.metmuseum.org/public/collection/v1/objects?offset=${(currentPage - 1) * 50}&limit=50`;
+//         if (searchTerm) {
+//           apiUrl = `https://collectionapi.metmuseum.org/public/collection/v1/search?q=${searchTerm}`;
+//         }
+//         const response = await axios.get(apiUrl);
+//         const totalObjects = response.data.total;
+//         const calculatedTotalPages = Math.ceil(totalObjects / 50);
+//         setTotalPages(calculatedTotalPages);
+//         setObjects(response.data.objectIDs);
+//         setLoading(false);
+//       } catch (error) {
+//         console.error('Error fetching objects:', error);
+//         setLoading(false);
+//       }
+//     };
+
+//     fetchObjectsForPage();
+//   }, [currentPage, searchTerm]);
+
+//   const handleNextPage = () => {
+//     setCurrentPage((prevPage) => prevPage + 1);
+//   };
+
+//   const handleSearch = (value) => {
+//     setSearchTerm(value);
+//     setCurrentPage(1);
+//   };
+
+//   return (
+//     <div>
+//       <h1>Collections - Page {currentPage}</h1>
+//       <SearchArts searchValue={handleSearch} />
+
+//       {loading && <p>Loading...</p>}
+//       {!loading && objects.length === 0 && <p>No objects found.</p>}
+//       {!loading && objects.length > 0 && (
+//         <div>
+//           <Grid container spacing={2}>
+//             {objects.slice(0, 50).map((objectID) => (
+//               <ArtListCard key={objectID} objectID={objectID} />
+//             ))}
+//           </Grid>
+//           {currentPage > 1 && <Link to={`/collection/page/${currentPage - 1}`}>Previous</Link>}
+//           {currentPage < totalPages && <Link to={`/collection/page/${currentPage + 1}`} onClick={handleNextPage}>Next</Link>}
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default CollectionPage;
+
+
+// import React, { useState, useEffect } from 'react';
+// import { Link, useParams } from 'react-router-dom';
+// import axios from 'axios';
+// import ArtListCard from './ArtListCard';
+// import { Grid } from '@mui/material';
+// import SearchArts from './SearchArts';
+
+// const CollectionPage = () => {
+//   const { page } = useParams();
+//   const [objects, setObjects] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const [totalPages, setTotalPages] = useState(1);
+//   const [currentPage, setCurrentPage] = useState(page ? parseInt(page) : 1);
+//   const [searchTerm, setSearchTerm] = useState('');
+
+//   useEffect(() => {
+//     const fetchObjectsForPage = async () => {
+//       try {
+//         setLoading(true);
+//         const response = await axios.get(`https://collectionapi.metmuseum.org/public/collection/v1/objects`);
+//         const allObjects = response.data.objectIDs;
+//         const totalObjects = allObjects.length;
+//         const calculatedTotalPages = Math.ceil(totalObjects / 50);
+//         setTotalPages(calculatedTotalPages);
+//         setObjects(allObjects);
+//         setLoading(false);
+//       } catch (error) {
+//         console.error('Error fetching objects:', error);
+//         setLoading(false);
+//       }
+//     };
+
+//     fetchObjectsForPage();
+//   }, []);
+
+//   const visibleObjects = objects.slice((currentPage - 1) * 50, currentPage * 50);
+
+//   const handleNextPage = () => {
+//     setCurrentPage((prevPage) => prevPage + 1);
+//   };
+//   const handlePreviousPage = () => {
+//     setCurrentPage((prevPage) => prevPage - 1);
+//   }
+
+//   const handleSearch = (value) => {
+//     setSearchTerm(value);
+//     setCurrentPage(1);
+//   };
+
+//   return (
+//     <div>
+//       <h1>Collections - Page {currentPage}</h1>
+//       <SearchArts searchValue={handleSearch} />
+
+//       {loading && <p>Loading...</p>}
+//       {!loading && visibleObjects.length === 0 && <p>No objects found.</p>}
+//       {!loading && visibleObjects.length > 0 && (
+//         <div>
+//           <Grid container spacing={2}>
+//             {visibleObjects.map((objectID) => (
+//               <ArtListCard key={objectID} objectID={objectID} />
+//             ))}
+//           </Grid>
+//           {currentPage > 1 && <Link to={`/collection/page/${currentPage - 1}`} onClick={handlePreviousPage}>Previous</Link>}
+//           {currentPage < totalPages && <Link to={`/collection/page/${currentPage + 1}`} onClick={handleNextPage}>Next</Link>}
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default CollectionPage;
 
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import ArtListCard from './ArtListCard';
 import { Grid } from '@mui/material';
-import SearchArts from './SearchArts'; // Import the SearchArts component
+import SearchArts from './SearchArts';
+import './component.css'
 
 const CollectionPage = () => {
   const { page } = useParams();
@@ -391,15 +537,12 @@ const CollectionPage = () => {
     const fetchObjectsForPage = async () => {
       try {
         setLoading(true);
-        let apiUrl = `https://collectionapi.metmuseum.org/public/collection/v1/objects?offset=${(currentPage - 1) * 50}&limit=50`;
-        if (searchTerm) {
-          apiUrl = `https://collectionapi.metmuseum.org/public/collection/v1/search?q=${searchTerm}`;
-        }
-        const response = await axios.get(apiUrl);
-        const totalObjects = response.data.total;
+        const response = await axios.get(`https://collectionapi.metmuseum.org/public/collection/v1/objects`);
+        const allObjects = response.data.objectIDs;
+        const totalObjects = allObjects.length;
         const calculatedTotalPages = Math.ceil(totalObjects / 50);
         setTotalPages(calculatedTotalPages);
-        setObjects(response.data.objectIDs);
+        setObjects(allObjects);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching objects:', error);
@@ -408,10 +551,25 @@ const CollectionPage = () => {
     };
 
     fetchObjectsForPage();
-  }, [currentPage, searchTerm]);
+  }, []);
+
+  const visibleObjects = objects.slice((currentPage - 1) * 50, currentPage * 50);
+
+  const handleFirstPage = () => {
+    setCurrentPage(1);
+  };
+  
 
   const handleNextPage = () => {
     setCurrentPage((prevPage) => prevPage + 1);
+  };
+
+  const handlePreviousPage = () => {
+    setCurrentPage((prevPage) => prevPage - 1);
+  };
+
+  const handleLastPage = () => {
+    setCurrentPage(totalPages);
   };
 
   const handleSearch = (value) => {
@@ -421,22 +579,28 @@ const CollectionPage = () => {
 
   return (
     <div>
+    <div className="pagination-buttons">
+    {currentPage > 1 && <Link to={`/collection/page/1`} onClick={handleFirstPage}>First Page</Link>}
+    {currentPage > 1 && <Link to={`/collection/page/${currentPage - 1}`} onClick={handlePreviousPage}>Previous Page</Link>}
+    {currentPage < totalPages && <Link to={`/collection/page/${currentPage + 1}`} onClick={handleNextPage}>Next Page</Link>}
+    {currentPage !== totalPages && <Link to={`/collection/page/${totalPages}`} onClick={handleLastPage}>Last Page</Link>}
+  </div>
+    <div className="collection-page">
       <h1>Collections - Page {currentPage}</h1>
       <SearchArts searchValue={handleSearch} />
 
       {loading && <p>Loading...</p>}
-      {!loading && objects.length === 0 && <p>No objects found.</p>}
-      {!loading && objects.length > 0 && (
+      {!loading && visibleObjects.length === 0 && <p>No objects found.</p>}
+      {!loading && visibleObjects.length > 0 && (
         <div>
           <Grid container spacing={2}>
-            {objects.slice(0, 50).map((objectID) => (
+            {visibleObjects.map((objectID) => (
               <ArtListCard key={objectID} objectID={objectID} />
             ))}
           </Grid>
-          {currentPage > 1 && <Link to={`/collection/page/${currentPage - 1}`}>Previous</Link>}
-          {currentPage < totalPages && <Link to={`/collection/page/${currentPage + 1}`} onClick={handleNextPage}>Next</Link>}
         </div>
       )}
+    </div>
     </div>
   );
 };
