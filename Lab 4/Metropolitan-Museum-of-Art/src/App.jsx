@@ -16,8 +16,8 @@ const App = () =>{
         <img src={logo} className='App-logo' alt = 'logo' />
         <h1 className= 'App-Title'> Welcome to the Metropolitan Museum of Art</h1>
         <div className='center-button'>
-            <Link className='ArtLink' to='/collection/page/1'>
-             Arts
+            <Link className='ArtLink' to='/'>
+             Home Page
             </Link>
         </div>
 
