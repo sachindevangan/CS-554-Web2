@@ -608,7 +608,7 @@
 // export default CollectionPage;
 
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ArtListCard from './ArtListCard';
 import { Grid } from '@mui/material';
@@ -616,6 +616,7 @@ import SearchArts from './SearchArts';
 import './component.css';
 
 const CollectionPage = () => {
+  const navigate = useNavigate();
   const { page } = useParams();
   const [objects, setObjects] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -631,7 +632,7 @@ const CollectionPage = () => {
         if (searchTerm) {
           apiUrl = `https://collectionapi.metmuseum.org/public/collection/v1/search?q=${searchTerm}`;
         }
-        
+
         const response = await axios.get(apiUrl);
         const allObjects = response.data.objectIDs;
         const totalObjects = allObjects.length;
@@ -642,11 +643,30 @@ const CollectionPage = () => {
       } catch (error) {
         console.error('Error fetching objects:', error);
         setLoading(false);
+
+        // Handle 404 error
+        if (error.response && error.response.status === 404) {
+          navigate('/404');
+        }
+        // Handle 400 error
+        else if (error.response && error.response.status === 400) {
+          navigate('/400');
+        }
       }
     };
+    if (currentPage > totalPages) {
+      navigate('/404'); // Redirect to the 404 page
+    }
+    
 
-    fetchObjectsForPage();
-  }, [currentPage, searchTerm]);
+    // Check if currentPage is below 1 or above 9706
+    if (currentPage < 1 ) {
+      navigate('/400');
+    } else {
+      fetchObjectsForPage();
+    }
+  }, [currentPage, searchTerm, navigate]);
+
 
   const visibleObjects = objects.slice(0, 50); // Display the first 50 objects from the search results
 

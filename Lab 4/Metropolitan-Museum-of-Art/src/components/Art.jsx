@@ -3,7 +3,8 @@ import axios from 'axios'
 import  '../App.css'
 import {Link, useParams} from 'react-router-dom'
 import noImage from '../img/download.jpeg'
-import { redirect } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+
 
 import {
   Card,
@@ -12,6 +13,8 @@ import {
   Typography,
   CardHeader
 } from '@mui/material'
+
+
 
 function Art(props) {
   const {id} = useParams()
@@ -39,20 +42,30 @@ function Art(props) {
     return month + '/' + day + '/' + year;
   };
 
+  const navigate = useNavigate();
+
   useEffect(() =>{
     console.log("Show useEffect fired!")
     const fetchData = async() =>{
       try{
+        // Check if id is less than 1, treat it as an invalid request and redirect to 400 page
+      const parsedId = parseInt(id);
+      if (isNaN(parsedId) || parsedId < 1) {
+        navigate('/400');
+        return;
+      }
         const {data} = await axios.get(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`)
         setArtData(data)
         setLoading(false)
         console.log(data)
-      }catch (e){
-          console.log(e)
+      }catch (error) {
+        console.error(error);
+        setLoading(false);
       }
-    }
-    fetchData()
-  }, [id])
+    };
+  
+    fetchData();
+  }, [id, navigate]);
 
   if (loading) {
     return (
@@ -101,11 +114,11 @@ function Art(props) {
           <dl>
             <p>
               <dt className='title'>Artist Name</dt>
-              <dd>{artData.artistDisplayName}</dd>
+              <dd>{artData.artistDisplayName || 'N/A'}</dd>
             </p>
             <p>
               <dt className='title'>Artist Bio:</dt>
-              <dd>{artData.artistDisplayBio}</dd>
+              <dd>{artData.artistDisplayBio || 'N/A'}</dd>
             </p>
             <p>
               <dt className='title'>Artist Gender:</dt>
@@ -113,23 +126,23 @@ function Art(props) {
             </p>
             <p>
               <dt className='title'>Object Date:</dt>
-              <dd>{artData.objectDate}</dd>
+              <dd>{artData.objectDate || 'N/A'}</dd>
             </p>
             <p>
               <dt className='title'>Department:</dt>
-              <dd>{artData.department}</dd>
+              <dd>{artData.department || 'N/A'}</dd>
             </p>
             <p>
               <dt className='title'>Medium:</dt>
-              <dd>{artData.medium}</dd>
+              <dd>{artData.medium || 'N/A'}</dd>
             </p>
             <p>
               <dt className='title'>Classification:</dt>
-              <dd>{artData.classification}</dd>
+              <dd>{artData.classification || 'N/A'}</dd>
             </p>
             <p>
               <dt className='title'>Culture:</dt>
-              <dd>{artData.culture}</dd>
+              <dd>{artData.culture || 'N/A'}</dd>
             </p>
             <p>
               <dt className='title'>Dimensions:</dt>
@@ -137,25 +150,25 @@ function Art(props) {
             </p>
             <p>
               <dt className='title'>Medium:</dt>
-              <dd>{artData.medium}</dd>
+              <dd>{artData.medium || 'N/A'}</dd>
             </p>
             <p>
               <dt className='title'>Credit Line:</dt>
-              <dd>{artData.creditLine}</dd>
+              <dd>{artData.creditLine || 'N/A'}</dd>
             </p>
             <p>
               <dt className='title'>Geography Type:</dt>
-              <dd>{artData.geographyType}</dd>
+              <dd>{artData.geographyType || 'N/A'}</dd>
             </p>
             <p>
               <dt className='title'>Repository:</dt>
-              <dd>{artData.repository}</dd>
+              <dd>{artData.repository || 'N/A'}</dd>
             </p>
             <p>
               <dt className='title'>Object URL:</dt>
               <dd>
                 <a href={artData.objectURL} target='_blank' rel='noopener noreferrer'>
-                  {artData.objectURL}
+                  {artData.objectURL || 'N/A'}
                 </a>
               </dd>
             </p>
@@ -163,16 +176,16 @@ function Art(props) {
               <dt className='title'>Wikidata URL:</dt>
               <dd>
                 <a href={artData.objectWikidata_URL} target='_blank' rel='noopener noreferrer'>
-                  {artData.objectWikidata_URL}
+                  {artData.objectWikidata_URL || 'N/A'}
                 </a>
               </dd>
             </p>
             <p>
               <dt className='title'>Gallery Number:</dt>
-              <dd>{artData.GalleryNumber}</dd>
+              <dd>{artData.GalleryNumber || 'N/A'}</dd>
             </p>
           </dl>
-          <Link to='/collection/page'>Back to all artworks...</Link>
+          <Link to='/collection/page/1'>Back to all artworks...</Link>
         </Typography>
       </CardContent>
     </Card>

@@ -23,7 +23,7 @@ input {
 }
 
 .App-header {
-	background-color: #1e8678;
+	background-color: #E4002B;
 	height: 200px;
 	padding: 20px;
 	color: #222;
@@ -131,21 +131,41 @@ dd {
 	margin-left: 5px;
 }
 
-.ArtLink {
-	background-color: white; /* Background color of the button */
-	color: black; /* Text color of the button */
-	text-decoration: none; /* Remove underline from the link text */
-	padding: 10px 20px; /* Padding inside the button */
-	border-radius: 5px; /* Border radius for rounded corners */
-	transition: background-color 0.3s ease; /* Smooth transition for background color */
+/* ... (previous styles) */
+
+.center-button {
+	text-align: center;
+	margin-top: 20px;
+	display: flex;
+	justify-content: center; /* Horizontally center the buttons */
+	align-items: center; /* Vertically center the buttons */
+  }
+  
+  .ArtLink {
+	background-color: white;
+	color: black;
+	text-decoration: none;
+	padding: 7px 20px;
+	border-radius: 5px;
+	transition: background-color 0.3s ease;
+	margin: 0 90px; /* Add margin between the buttons */
   }
   
   .ArtLink:hover {
-	background-color: #155e52; /* Background color when hovering over the button */
+	background-color: #155e52;
   }
- 
-  .center-button {
-	text-align: center;
-	margin-top: 20px; /* Adjust the margin as needed */
+  
+  .Art-Collection {
+	background-color: white;
+	color: black;
+	text-decoration: none;
+	padding: 7px 20px;
+	border-radius: 5px;
+	transition: background-color 0.3s ease;
+	margin: 0 10px; /* Add margin between the buttons */
+  }
+
+  .Art-Collection:hover {
+	background-color: #155e52;
   }
   
