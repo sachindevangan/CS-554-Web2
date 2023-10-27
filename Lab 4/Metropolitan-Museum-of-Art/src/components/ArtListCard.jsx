@@ -24,6 +24,8 @@ function ArtListCard({ objectID }) {
     return null; // or loading indicator
   }
 
+  const artistDisplayName = artDetails.artistDisplayName || 'Unknown Artist'; // Get artist display name or set to 'Unknown Artist'
+
   return (
     <Grid item xs={12} sm={7} md={5} lg={4} xl={3}>
       <Card
@@ -40,11 +42,12 @@ function ArtListCard({ objectID }) {
         }}
       >
         <CardActionArea>
-          <Link to={`/collection/page/${objectID}`}>
+          <Link to={`/collection/${objectID}`}>
             <CardMedia
               sx={{
-                height: '100%',
+                height: 200, // Set height for the image
                 width: '100%',
+                objectFit: 'cover', // Ensure the image covers the area without stretching
               }}
               component='img'
               image={artDetails.primaryImage ? artDetails.primaryImage : noImage}
@@ -63,7 +66,8 @@ function ArtListCard({ objectID }) {
                 {artDetails.title}
               </Typography>
               <Typography variant='body2' color='textSecondary' component='p'>
-                {artDetails.objectDate ? `Date: ${artDetails.objectDate}` : 'No Date'}
+                Artist: {artistDisplayName}<br />
+                {artDetails.objectDate ? `Date: ${artDetails.objectDate}` : 'Date: Unknown Date'}
               </Typography>
             </CardContent>
           </Link>
