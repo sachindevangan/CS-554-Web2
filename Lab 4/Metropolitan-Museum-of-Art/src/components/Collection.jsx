@@ -146,6 +146,16 @@ const isDepartmentSearch = !!departmentId;
   useEffect(() => {
     const fetchObjectsForPage = async () => {
       try {
+        if (currentPage <= 0) {
+          navigate('/400'); 
+          return;
+        }
+
+        if (currentPage > totalPages && totalPages > 1) {
+          navigate('/404'); 
+          return;
+        }
+
         setLoading(true);
         let apiUrl = '';
         if (departmentId) {
