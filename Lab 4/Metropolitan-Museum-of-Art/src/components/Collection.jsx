@@ -160,6 +160,12 @@ const isDepartmentSearch = !!departmentId;
         const response = await axios.get(apiUrl);
         console.log("These are the objects", response.data)
         const allObjects = response.data.objectIDs;
+        if (allObjects === null) {
+          setTotalPages(0);
+          setObjects([]);
+          setLoading(false);
+          return;
+        }
         const totalObjects = allObjects.length;
         const calculatedTotalPages = Math.ceil(totalObjects / 50);
         setTotalPages(calculatedTotalPages);
@@ -183,14 +189,6 @@ const isDepartmentSearch = !!departmentId;
       }
     };
     fetchObjectsForPage();
-
-    // if (currentPage < 1 ) {
-    //   navigate('/400'); 
-    // } else if (currentPage > totalPages) {
-    //   navigate('/404'); 
-    // } else{
-    //   fetchObjectsForPage();
-    // }
   }, [currentPage, searchTerm, departmentId, navigate, totalPages,  isDepartmentSearch]);
 
   const visibleObjects = objects.slice(0, 50); 
@@ -221,7 +219,6 @@ const isDepartmentSearch = !!departmentId;
 
   const handleSearch = (value) => {
     setSearchTerm(value);
-    // Explicitly set searchTerm in the URL if you need it
     navigate(`/collection/page/1${isDepartmentSearch ? `?departmentIds=${departmentId}` : ''}&searchTerm=${value}`);
     setCurrentPage(1);
   };
@@ -229,60 +226,56 @@ const isDepartmentSearch = !!departmentId;
 
   return (
     <div>
-    <div className="pagination-buttons">{currentPage > 1 && (<Link to={`/collection/page/1${isDepartmentSearch ? `?departmentIds=${departmentId}` : ''}${searchTerm ? `&searchTerm=${searchTerm}` : ''}`}
-      onClick={handleFirstPage}
-    >
-      First Page
-    </Link>
-  )}
+    <div className="pagination-buttons">{currentPage > 1 && (
+      <Link to={`/collection/page/1${isDepartmentSearch ? `?departmentIds=${departmentId}` : ''}${searchTerm ? `&searchTerm=${searchTerm}` : ''}`}
+       onClick={handleFirstPage}>
+       First Page
+      </Link>
+ )}
   {currentPage > 1 && (
     <Link
       to={`/collection/page/${currentPage - 1}${isDepartmentSearch ? `?departmentIds=${departmentId}` : ''}${searchTerm ? `&searchTerm=${searchTerm}` : ''}`}
-      onClick={handlePreviousPage}
-    >
+      onClick={handlePreviousPage}>
       Previous Page
     </Link>
   )}
   {currentPage < totalPages && (
     <Link
       to={`/collection/page/${currentPage + 1}${isDepartmentSearch ? `?departmentIds=${departmentId}` : ''}${searchTerm ? `&searchTerm=${searchTerm}` : ''}`}
-      onClick={handleNextPage}
-    >
+      onClick={handleNextPage}>
       Next Page
     </Link>
   )}
   {currentPage !== totalPages && (
     <Link
       to={`/collection/page/${totalPages}${isDepartmentSearch ? `?departmentIds=${departmentId}` : ''}${searchTerm ? `&searchTerm=${searchTerm}` : ''}`}
-      onClick={handleLastPage}
-    >
-      Last Page
+      onClick={handleLastPage}>
+     Last Page
     </Link>
   )}
 </div>
-{isDepartmentSearch && <h1>Department {departmentId} - Page {currentPage}</h1>}
-{!isDepartmentSearch && searchTerm && (
-  <div className="collection-page">
+    {isDepartmentSearch && <h1>Department {departmentId} - Page {currentPage}</h1>}
+    {!isDepartmentSearch && searchTerm && (
+<div className="collection-page">
     <h1>Search Results for "{searchTerm}" - Page {currentPage}</h1>
     <SearchArts searchValue={handleSearch} />
-  </div>
+</div>
 )}
-{!isDepartmentSearch && !searchTerm && (
+    {!isDepartmentSearch && !searchTerm && (
   <div className="collection-page">
     <h1>Art Collections - Page {currentPage}</h1>
     <SearchArts searchValue={handleSearch} />
   </div>
 )}
 
-    {!loading && visibleObjects.length === 0 && <p>No objects found.</p>}
-    {!loading && visibleObjects.length > 0 && (
-      <div>
-        <Grid container spacing={2}>
-          {visibleObjects.map((objectID) => (
-            <ArtListCard key={objectID} objectID={objectID} />
-          ))}
-        </Grid>
-      </div>
+  {!loading && visibleObjects.length === 0 && (<p style={{ fontSize: '25px', fontWeight: 'bold' }}>No objects found.</p>)}
+  {!loading && visibleObjects.length > 0 && (
+  <div>
+      <Grid container spacing={2}>
+        {visibleObjects.map((objectID) => (
+        <ArtListCard key={objectID} objectID={objectID} /> ))}
+      </Grid>
+  </div>
     )}
   </div>
 );
