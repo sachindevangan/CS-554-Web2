@@ -7,7 +7,7 @@ const SearchArts = (props) => {
 
   return (
     <form method='POST' onSubmit={(e) => e.preventDefault()} name='formName' className='center'>
-      <label>
+      <label style={{ fontWeight: 'bold' }}>
         <span>Search Arts: </span>
         <input autoComplete='off' type='text' name='searchTerm' onChange={handleChange} />
       </label>

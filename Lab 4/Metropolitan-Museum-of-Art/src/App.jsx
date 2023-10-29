@@ -5,6 +5,7 @@ import Art from './components/Art'
 import Home from './components/Home'
 import NotFound from './components/404'
 import BadRequest from './components/400'
+import Footer from './components/footer'
 import {Route, Link, Routes} from 'react-router-dom'
 
 
@@ -38,6 +39,7 @@ const App = () =>{
         <Route path="/404" element={<NotFound />} />
         <Route path="/400" element={<BadRequest />} />
        </Routes>
+       <Footer />
     </div>
   );
 };

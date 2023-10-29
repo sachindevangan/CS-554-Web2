@@ -13,6 +13,7 @@ import {
   Typography,
   CardHeader
 } from '@mui/material'
+import { red } from '@mui/material/colors'
 
 
 
@@ -84,14 +85,14 @@ function Art(props) {
         marginLeft: 'auto',
         marginRight: 'auto',
         borderRadius: 5,
-        border: '1px solid #1e8678',
+        border: '1px solid #000000',
         boxShadow: '0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);'
       }}
     >
       <CardHeader
         title={artData.title}
         sx={{
-          borderBottom: '1px solid #1e8678',
+          borderBottom: '1px solid #000000',
           fontWeight: 'bold'
         }}
       />
@@ -101,13 +102,13 @@ function Art(props) {
         title={artData.title}
       />
 
-      <CardContent>
+      <CardContent className='background-color'>
         <Typography
           variant='body2'
           color='textSecondary'
           component='span'
           sx={{
-            borderBottom: '1px solid #1e8678',
+            borderBottom: '1px solid #000000',
             fontWeight: 'bold'
           }}
         >

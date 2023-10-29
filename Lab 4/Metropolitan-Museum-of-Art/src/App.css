@@ -1,6 +1,13 @@
-App {
-	text-align: center;
-}
+.App {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh; /* Set the minimum height of the viewport */
+  }
+  .content {
+	flex: 1; /* Allow the content to take up remaining vertical space */
+	padding-bottom: 60px; /* Height of the footer + additional padding (if needed) */
+  }
+
 .center {
 	display: block;
 	margin-left: auto;
@@ -13,7 +20,11 @@ App {
 
 /* searchterm */
 input {
-	border: 2px solid #1e8678;
+	border: 2px solid #991818;
+	height: 10px; /* Set an appropriate height */
+  padding: 10px; /* Adjust padding as needed */
+  margin: 0; /* Reset margin if necessary */
+  margin-right: 100px;
 }
 .show-body {
 	display: block;
@@ -23,10 +34,10 @@ input {
 }
 
 .App-header {
-	background-color: #E4002B;
+	background-color: #991818;
 	height: 200px;
 	padding: 20px;
-	color: #222;
+	color:white;
 }
 
 .App-title {
@@ -86,11 +97,12 @@ p {
 }
 
 div {
+	background-color:antiquewhite;
 	text-align: center;
 }
 
 a {
-	color: #1e8678;
+	color: #000000;
 	text-decoration: none !important;
 }
 
@@ -111,11 +123,13 @@ ul {
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
 	input {
-		font-size: 16px;
+		font-size: 20px;
 	}
 }
 
-dt,
+dt.title{
+color: #991818;
+}
 dl {
 	padding: 0px;
 	margin-top: 0px;
@@ -127,6 +141,7 @@ dt {
 }
 
 dd {
+	color: #000000;
 	display: inline;
 	margin-left: 5px;
 }
@@ -142,6 +157,7 @@ dd {
   }
   
   .ArtLink {
+	font-weight: bolder;
 	background-color: white;
 	color: black;
 	text-decoration: none;
@@ -152,10 +168,11 @@ dd {
   }
   
   .ArtLink:hover {
-	background-color: #155e52;
+	background-color: #991818;
   }
   
   .Art-Collection {
+	font-weight: bolder;
 	background-color: white;
 	color: black;
 	text-decoration: none;
@@ -166,6 +183,20 @@ dd {
   }
 
   .Art-Collection:hover {
-	background-color: #155e52;
+	background-color: #991818;
+  }
+  
+  body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.background-color {
+	background-color: antiquewhite;
+	/* Add other styles as needed */
   }
   

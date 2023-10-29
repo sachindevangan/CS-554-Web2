@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Card, CardActionArea, CardContent, CardMedia, Typography, Grid } from '@mui/material';
 
 function ArtListCard({ objectID }) {
+  console.log("Received Object ID", objectID);
   const [artDetails, setArtDetails] = useState(null);
 
   useEffect(() => {
@@ -12,6 +13,7 @@ function ArtListCard({ objectID }) {
       try {
         const response = await axios.get(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectID}`);
         setArtDetails(response.data);
+        console.log("thisis response data",response.data)
       } catch (error) {
         console.error('Error fetching art details:', error);
       }
@@ -27,16 +29,17 @@ function ArtListCard({ objectID }) {
   const artistDisplayName = artDetails.artistDisplayName || 'Unknown Artist'; // Get artist display name or set to 'Unknown Artist'
 
   return (
+    <>
     <Grid item xs={12} sm={7} md={5} lg={4} xl={3}>
       <Card
         variant='outlined'
-        sx={{
+        sx={{ 
           maxWidth: 250,
           height: 'auto',
           marginLeft: 'auto',
           marginRight: 'auto',
-          borderRadius: 5,
-          border: '1px solid #1e8678',
+          borderRadius: 10,
+          border: '1px solid #000000;',
           boxShadow:
             '0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);'
         }}
@@ -74,7 +77,9 @@ function ArtListCard({ objectID }) {
         </CardActionArea>
       </Card>
     </Grid>
+    </>
   );
 }
+
 
 export default ArtListCard;
