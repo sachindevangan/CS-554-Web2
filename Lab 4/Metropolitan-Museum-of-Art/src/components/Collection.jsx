@@ -206,6 +206,12 @@ const isDepartmentSearch = !!departmentId;
   useEffect(() => {
     const fetchObjectsForPage = async () => {
       try {
+
+        if ((isDepartmentSearch && (!departmentId || departmentId < 1)) || currentPage <= 0) {
+          navigate('/400');
+          return;
+        }
+  
         if (currentPage <= 0) {
           navigate('/400'); 
           return;
@@ -219,17 +225,22 @@ const isDepartmentSearch = !!departmentId;
         setLoading(true);
         let apiUrl = '';
         let objectsPerPage = 50;
-        if (departmentId) {
-        apiUrl = `https://collectionapi.metmuseum.org/public/collection/v1/objects?departmentIds=${departmentId}&offset=${(currentPage - 1) * 50}`;
+
+        if (isDepartmentSearch && departmentId > 0) {
+          apiUrl = `https://collectionapi.metmuseum.org/public/collection/v1/objects?departmentIds=${departmentId}&offset=${(currentPage - 1) * 50}`;
         } else {
-        apiUrl = `https://collectionapi.metmuseum.org/public/collection/v1/objects?offset=${(currentPage - 1) * 50}`;
-        if (searchTerm !== undefined && searchTerm !== null && searchTerm !== '') {
-         objectsPerPage = 20;
-        apiUrl = `https://collectionapi.metmuseum.org/public/collection/v1/search?q=${(searchTerm)}`;
-         }
+          apiUrl = `https://collectionapi.metmuseum.org/public/collection/v1/objects?offset=${(currentPage - 1) * 50}`;
+          if (searchTerm !== undefined && searchTerm !== null && searchTerm !== '') {
+            objectsPerPage = 20;
+            apiUrl = `https://collectionapi.metmuseum.org/public/collection/v1/search?q=${searchTerm}`;
+          }
         }
 
         const response = await axios.get(apiUrl);
+        if (isDepartmentSearch && departmentId && !response.data || (response.data && response.data.total == 0)) {
+          navigate('/404')
+          return;
+        }
         console.log("These are the objects", response.data)
         const allObjects = response.data.objectIDs;
         if (allObjects === null) {
@@ -294,6 +305,7 @@ const isDepartmentSearch = !!departmentId;
     navigate(`/collection/page/1${isDepartmentSearch ? `?departmentIds=${departmentId}` : ''}&searchTerm=${value}`);
     setCurrentPage(1);
   };
+
   
 
   return (
