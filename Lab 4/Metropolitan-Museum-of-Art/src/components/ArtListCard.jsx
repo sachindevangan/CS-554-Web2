@@ -59,7 +59,7 @@ function ArtListCard({ objectID }) {
             <CardContent>
               <Typography
                 sx={{
-                  borderBottom: '1px solid #1e8678',
+                  borderBottom: '1px solid #000000',
                   fontWeight: 'bold',
                 }}
                 gutterBottom
