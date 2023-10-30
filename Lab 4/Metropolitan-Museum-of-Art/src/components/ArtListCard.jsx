@@ -4,12 +4,12 @@ import noImage from '../img/download.jpeg';
 import { Link } from 'react-router-dom';
 import { Card, CardActionArea, CardContent, CardMedia, Typography, Grid } from '@mui/material';
 
-function ArtListCard({ objectID }) {
+const ArtListCard = ({ objectID }) => {
   console.log("Received Object ID", objectID);
   const [artDetails, setArtDetails] = useState(null);
 
   useEffect(() => {
-    async function fetchArtDetails() {
+    const fetchArtDetails = async () => {
       try {
         const response = await axios.get(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectID}`);
         setArtDetails(response.data);
@@ -23,10 +23,10 @@ function ArtListCard({ objectID }) {
   }, [objectID]);
 
   if (!artDetails) {
-    return null; // or loading indicator
+    return null;
   }
 
-  const artistDisplayName = artDetails.artistDisplayName || 'Unknown Artist'; // Get artist display name or set to 'Unknown Artist'
+  const artistDisplayName = artDetails.artistDisplayName || 'Unknown Artist'; 
 
   return (
     <>
@@ -48,9 +48,9 @@ function ArtListCard({ objectID }) {
           <Link to={`/collection/${objectID}`}>
             <CardMedia
               sx={{
-                height: 200, // Set height for the image
+                height: 200,
                 width: '100%',
-                objectFit: 'cover', // Ensure the image covers the area without stretching
+                objectFit: 'cover', 
               }}
               component='img'
               image={artDetails.primaryImage ? artDetails.primaryImage : noImage}
