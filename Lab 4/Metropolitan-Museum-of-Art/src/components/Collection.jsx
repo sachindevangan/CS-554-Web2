@@ -231,7 +231,7 @@ const isDepartmentSearch = !!departmentId;
         } else {
           apiUrl = `https://collectionapi.metmuseum.org/public/collection/v1/objects?offset=${(currentPage - 1) * 50}`;
           if (searchTerm !== undefined && searchTerm !== null && searchTerm !== '') {
-            objectsPerPage = 20;
+            objectsPerPage = 30;
             apiUrl = `https://collectionapi.metmuseum.org/public/collection/v1/search?q=${searchTerm}`;
           }
         }
