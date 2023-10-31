@@ -1,11 +1,11 @@
 .App {
 	display: flex;
 	flex-direction: column;
-	min-height: 100vh; /* Set the minimum height of the viewport */
+	min-height: 100vh; 
   }
   .content {
-	flex: 1; /* Allow the content to take up remaining vertical space */
-	padding-bottom: 60px; /* Height of the footer + additional padding (if needed) */
+	flex: 1; 
+	padding-bottom: 60px; 
   }
 
 .center {
@@ -18,12 +18,12 @@
 	height: 90px;
 }
 
-/* searchterm */
+
 input {
 	border: 2px solid #991818;
-	height: 10px; /* Set an appropriate height */
-  padding: 10px; /* Adjust padding as needed */
-  margin: 0; /* Reset margin if necessary */
+	height: 10px; 
+  padding: 10px; 
+  margin: 0; 
   margin-right: 100px;
 }
 .show-body {
@@ -116,7 +116,6 @@ ul {
 	list-style: none;
 }
  
-/* particular art title */
 .title {
 	font-weight: bold;
 	color: #0b7532fd;
@@ -147,14 +146,13 @@ dd {
 	margin-left: 5px;
 }
 
-/* ... (previous styles) */
 
 .center-button {
 	text-align: center;
 	margin-top: 20px;
 	display: flex;
-	justify-content: center; /* Horizontally center the buttons */
-	align-items: center; /* Vertically center the buttons */
+	justify-content: center; 
+	align-items: center; 
   }
   
   .ArtLink {
@@ -165,7 +163,7 @@ dd {
 	padding: 7px 20px;
 	border-radius: 5px;
 	transition: background-color 0.3s ease;
-	margin: 0 90px; /* Add margin between the buttons */
+	margin: 0 90px; 
   }
   
   .ArtLink:hover {
@@ -180,7 +178,7 @@ dd {
 	padding: 7px 20px;
 	border-radius: 5px;
 	transition: background-color 0.3s ease;
-	margin: 0 10px; /* Add margin between the buttons */
+	margin: 0 10px; 
   }
 
   .Art-Collection:hover {
@@ -198,6 +196,5 @@ dd {
 
 .background-color {
 	background-color: antiquewhite;
-	/* Add other styles as needed */
   }
   
