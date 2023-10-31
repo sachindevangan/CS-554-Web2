@@ -8,6 +8,8 @@ const ArtListCard = ({ objectID }) => {
   console.log("Received Object ID", objectID);
   const [artDetails, setArtDetails] = useState(null);
 
+  const titleLimit = 30;
+
   useEffect(() => {
     const fetchArtDetails = async () => {
       try {
@@ -61,12 +63,15 @@ const ArtListCard = ({ objectID }) => {
                 sx={{
                   borderBottom: '1px solid #000000',
                   fontWeight: 'bold',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis', 
+                   whiteSpace: 'nowrap', 
                 }}
                 gutterBottom
                 variant='h6'
                 component='h3'
               >
-                {artDetails.title}
+                {artDetails.title.length > titleLimit ? artDetails.title.substring(0, titleLimit) + '...' : artDetails.title}
               </Typography>
               <Typography variant='body2' color='textSecondary' component='p'>
                 Artist: {artistDisplayName}<br />
