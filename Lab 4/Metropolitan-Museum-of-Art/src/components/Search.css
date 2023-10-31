@@ -1,0 +1,14 @@
+.search-button {
+    margin-right: 10px;
+    padding: 10px 10px;
+    background-color: #991818;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .search-button:hover {
+    background-color: #4b0f04;
+  }
+  

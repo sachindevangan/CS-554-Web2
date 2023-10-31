@@ -17,14 +17,14 @@ const App = () =>{
     <div className = 'App'>
        <header className='App-header'>
         <img src={logo} className='App-logo' alt = 'logo' />
-        <h1 className= 'App-Title'> Welcome to the MET</h1>
+        <h1 className= 'App-Title'> Welcome to the Metropolitan Museum of Art</h1>
         <div className='center-button'>
             <Link className='ArtLink' to='/'>
              Home Page
             </Link>
             <div>
             <Link className = 'Art-Collection' to = '/collection/page/1'> 
-            Browse Art Collections
+            Explore Art Collections
             </Link>
             </div>
         </div>

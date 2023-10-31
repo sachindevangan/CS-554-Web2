@@ -122,8 +122,8 @@ const Art = (props)  =>{
               <dd>{artData.dimensions || 'N/A'}</dd>
             </p>
             <p>
-              <dt className='title'>Medium:</dt>
-              <dd>{artData.medium || 'N/A'}</dd>
+              <dt className='title'>Period:</dt>
+              <dd>{artData.period || 'N/A'}</dd>
             </p>
             <p>
               <dt className='title'>Credit Line:</dt>

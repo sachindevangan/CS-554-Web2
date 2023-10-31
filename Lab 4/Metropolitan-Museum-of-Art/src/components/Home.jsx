@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div className="home-container">
       <div className="hero-section">
-        <h1>Embark on a Journey Through Art and Culture!</h1>
+        <h1>A Journey Through Art and Culture!</h1>
       </div>
 
       <div className="favorite-art-section">
