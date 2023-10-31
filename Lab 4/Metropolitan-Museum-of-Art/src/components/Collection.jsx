@@ -94,6 +94,8 @@ const isDepartmentSearch = !!departmentId;
 
   const handleFirstPage = () => {
     setCurrentPage(1);
+    const url = `/collection/page/1${isDepartmentSearch ? `?departmentIds=${departmentIdParam}` : ''}${searchTerm ? `&searchTerm=${searchTerm}` : ''}`;
+    navigate(url);
   };
 
   const handleNextPage = () => {
@@ -124,33 +126,27 @@ const isDepartmentSearch = !!departmentId;
 
   return (
     <div>
-    <div className="pagination-buttons">{currentPage > 1 && (
-      <Link to={`/collection/page/1${isDepartmentSearch ? `?departmentIds=${departmentId}` : ''}${searchTerm ? `&searchTerm=${searchTerm}` : ''}`}
-       onClick={handleFirstPage}>
-       First Page
-      </Link>
- )}
-  {currentPage > 1 && (
-    <Link
-      to={`/collection/page/${currentPage - 1}${isDepartmentSearch ? `?departmentIds=${departmentId}` : ''}${searchTerm ? `&searchTerm=${searchTerm}` : ''}`}
-      onClick={handlePreviousPage}>
-      Previous Page
-    </Link>
-  )}
-  {currentPage < totalPages && (
-    <Link
-      to={`/collection/page/${currentPage + 1}${isDepartmentSearch ? `?departmentIds=${departmentId}` : ''}${searchTerm ? `&searchTerm=${searchTerm}` : ''}`}
-      onClick={handleNextPage}>
-      Next Page
-    </Link>
-  )}
-  {currentPage !== totalPages && (
-    <Link
-      to={`/collection/page/${totalPages}${isDepartmentSearch ? `?departmentIds=${departmentId}` : ''}${searchTerm ? `&searchTerm=${searchTerm}` : ''}`}
-      onClick={handleLastPage}>
-     Last Page
-    </Link>
-  )}
+    <div className="pagination-buttons">
+        {currentPage > 1 && (
+          <button className="pagination-button" onClick={handleFirstPage}>
+            First Page
+          </button>
+        )}
+        {currentPage > 1 && (
+          <button className="pagination-button" onClick={handlePreviousPage}>
+            Previous Page
+          </button>
+        )}
+        {currentPage < totalPages && (
+          <button className="pagination-button" onClick={handleNextPage}>
+            Next Page
+          </button>
+        )}
+        {currentPage !== totalPages && (
+          <button className="pagination-button" onClick={handleLastPage}>
+            Last Page
+          </button>
+        )}
 </div>
     {isDepartmentSearch && <h1>Department {departmentId} - Page {currentPage}</h1>}
     {!isDepartmentSearch && searchTerm && (
