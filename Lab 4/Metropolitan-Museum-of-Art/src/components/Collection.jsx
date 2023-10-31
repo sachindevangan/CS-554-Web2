@@ -183,6 +183,7 @@ const isDepartmentSearch = !!departmentId;
       </Grid>
   </div>
     )}
+    {loading && (<p style={{ fontSize: '25px', fontWeight: 'bold' }}>Loading.....</p>)}
   </div>
 );
 };
