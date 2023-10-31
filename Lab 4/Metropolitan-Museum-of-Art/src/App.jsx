@@ -36,8 +36,10 @@ const App = () =>{
         <Route path = '/' element = {<Home/>} />
         <Route path = '/collection/page/:page' element = {<Collection/>} />
         <Route path = '/collection/:id' element = {<Art/>} />
+        <Route path='/collection/page/' element = {<NotFound/>} />
         <Route path="/404" element={<NotFound />} />
         <Route path="/400" element={<BadRequest />} />
+        <Route path="*" element = {<NotFound />} />
        </Routes>
        <Footer />
     </div>

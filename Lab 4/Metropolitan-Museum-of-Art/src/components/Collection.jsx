@@ -85,12 +85,6 @@ const isDepartmentSearch = !!departmentId;
       } catch (error) {
         console.error('Error fetching objects:', error);
         setLoading(false);
-
-        if (error.response && error.response.status === 404) {
-          navigate('/404');
-        } else if (error.response && error.response.status === 400) {
-          navigate('/400');
-        }
       }
     };
     fetchObjectsForPage();
@@ -127,8 +121,6 @@ const isDepartmentSearch = !!departmentId;
     navigate(`/collection/page/1${isDepartmentSearch ? `?departmentIds=${departmentId}` : ''}&searchTerm=${value}`);
     setCurrentPage(1);
   };
-
-  
 
   return (
     <div>
