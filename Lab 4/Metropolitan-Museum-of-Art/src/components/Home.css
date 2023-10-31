@@ -30,12 +30,12 @@
   
   
   .favorite-art-image {
-    width: 300px; /* Adjust the width as needed */
+    width: 300px; 
     height:auto;
-    margin-right: 20px; /* Add some spacing between the image and description */
+    margin-right: 20px; 
   }
   
   .favorite-art-description {
-    flex: 1; /* Allow the description to take up remaining space */
+    flex: 1; 
   }
   
