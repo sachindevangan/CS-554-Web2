@@ -198,3 +198,11 @@ dd {
 	background-color: antiquewhite;
   }
   
+.description-list dt.title {
+  margin-bottom: 8px; 
+}
+
+.description-list dd {
+  margin-bottom: 8px 
+}
+
