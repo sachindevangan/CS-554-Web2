@@ -62,7 +62,7 @@ export const resolvers = {
             };
 
             // Store the comic data in Redis cache
-            const data = await client.set(`comic:${comicId}`, JSON.stringify(extractedComicData));
+            const data = await client.set(`comic:${id}`, JSON.stringify(extractedComicData));
   
             // Return the extracted data
             return extractedComicData;  
@@ -90,7 +90,7 @@ export const resolvers = {
           const exist = await client.exists(`comicsPage:${pageNum}`);
           if (exist) {
             const comicsPageRedisData = await client.get(`comicsPage:${pageNum}`);
-            return res.status(200).json(JSON.parse(comicsPageRedisData));
+            return JSON.parse(comicsPageRedisData);
           }
       
           // Fetch paginated comic data from the Marvel API

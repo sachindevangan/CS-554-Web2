@@ -12,6 +12,12 @@ type Comic {
     thumbnail: Image
   }
 
+  type Image {
+    path: String
+    extension: String
+  }
+  
+
 type Series {
     name: String
   }
