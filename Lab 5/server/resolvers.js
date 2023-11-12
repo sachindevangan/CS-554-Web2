@@ -13,10 +13,9 @@ const client = redis.createClient();
 export const resolvers = {
     Query: {
         comic: async (_, { id }) => {
-
-            if (!client.isOpen) {
-                await client.connect();
-              }
+          if (!client.isOpen) {
+            await client.connect();
+            }
 
               //check if the comic data exist in the redis cache
              const exist = await client.exists(`comic:${id}`)
@@ -52,13 +51,6 @@ export const resolvers = {
               pageCount: comicData.pageCount,
               modified: comicData.modified,
               resourceURI: comicData.resourceURI,
-              series: {
-                name: comicData.series.name,
-              },
-              thumbnail: {
-                path: comicData.thumbnail.path,
-                extension: comicData.thumbnail.extension,
-              },
             };
 
             // Store the comic data in Redis cache
@@ -79,8 +71,6 @@ export const resolvers = {
             })
             }
           },
-        },
-
         comicsPage: async (_, { pageNum }) => {
           if (!client.isOpen) {
             await client.connect();
@@ -116,13 +106,6 @@ export const resolvers = {
                 pageCount: comicData.pageCount,
                 modified: comicData.modified,
                 resourceURI: comicData.resourceURI,
-                series: {
-                  name: comicData.series.name,
-                },
-                thumbnail: {
-                  path: comicData.thumbnail.path,
-                  extension: comicData.thumbnail.extension,
-                },
               }));
       
               // Store the paginated data in Redis cache
@@ -142,5 +125,6 @@ export const resolvers = {
               extensions: { code: 'INTERNAL_SERVER_ERROR' }
             });
           }
-        },
-      };
+        }
+      }
+    }
