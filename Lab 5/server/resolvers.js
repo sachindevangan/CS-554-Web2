@@ -22,7 +22,7 @@ export const resolvers = {
              if (exist) {
                 const comicRedisData =await  client.get(`comic:${id}`)
               
-                return res.status(200).json(JSON.parse(comicRedisData));
+                return JSON.parse(comicRedisData);
              }
 
              // Fetch comic data from the Marvel API
@@ -66,9 +66,16 @@ export const resolvers = {
               }
             } catch (error) {
               console.error('Error fetching data from Marvel API:', error);
-              throw new GraphQLError(`Internal Server Error`, {
-                extensions: {code: 'INTERNAL_SERVER_ERROR'}
-            })
+        
+              if (error.response) {
+                throw new GraphQLError(error.response.data.status, {
+                  extensions: { code: error.response.data.code, statusCode: error.response.status }
+                });
+              } else {
+                throw new GraphQLError('Internal Server Error', {
+                  extensions: { code: 'INTERNAL_SERVER_ERROR' }
+                });
+              }
             }
           },
         comicsPage: async (_, { pageNum }) => {
@@ -110,20 +117,25 @@ export const resolvers = {
       
               // Store the paginated data in Redis cache
               const data = await client.set(`comicsPage:${pageNum}`, JSON.stringify(comicsPageData));
-      
-              // Return the paginated data
+    
               return comicsPageData;
             } else {
-              // Throw a GraphQL error indicating that the page doesn't exist or has no comics
               throw new GraphQLError('Page Not Found', {
                 extensions: { code: 'NOT_FOUND', statusCode: 404 }
               });
             }
-          } catch (error) {
+          }  catch (error) {
             console.error('Error fetching data from Marvel API:', error);
-            throw new GraphQLError('Internal Server Error', {
-              extensions: { code: 'INTERNAL_SERVER_ERROR' }
-            });
+      
+            if (error.response) {
+              throw new GraphQLError(error.response.data.status, {
+                extensions: { code: error.response.data.code, statusCode: error.response.status }
+              });
+            } else {
+              throw new GraphQLError('Internal Server Error', {
+                extensions: { code: 'INTERNAL_SERVER_ERROR' }
+              });
+            }
           }
         }
       }
