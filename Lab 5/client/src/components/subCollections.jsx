@@ -53,7 +53,7 @@ const SubCollection = () => {
   return (
     <div>
       <h2>Collections</h2>
-      <div>
+      <div className="sub-collection-input">
         <label>New Sub-Collection Name:</label>
         <input
           type="text"
@@ -62,6 +62,7 @@ const SubCollection = () => {
         />
         <button onClick={handleAddSubCollection}>Add Sub-Collection</button>
       </div>
+      <div className="current-sub-collections">
       <h3>Current Sub-Collections:</h3>
       <div>
         <ul>
@@ -75,6 +76,7 @@ const SubCollection = () => {
             </li>
           ))}
         </ul>
+      </div>
       </div>
       <div className="comics-list">
   <h3>Sub-Collection Comics:</h3>

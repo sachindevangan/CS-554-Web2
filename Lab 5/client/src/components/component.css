@@ -140,3 +140,79 @@
 .give-up-btn:hover {
   background-color: #c82333; 
 }
+
+
+li {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+li button:nth-child(2) {
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+li button:nth-child(3) {
+  margin-left: 5px;
+  padding: 5px 10px;
+  background-color: #008cba;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+li button:nth-child(3).selected {
+  background-color: #4caf50;
+}
+
+.sub-collection-input {
+  margin-bottom: 10px;
+}
+
+.sub-collection-input input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.sub-collection-input button {
+  padding: 8px 20px;
+  background-color: #991818;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.sub-collection-input button:hover {
+  background-color: #4b0f04;
+}
+
+.current-sub-collections {
+  margin-bottom: 20px;
+}
+
+.current-sub-collections li {
+  margin-bottom: 10px;
+  list-style: none;
+}
+
+.current-sub-collections li.selected {
+  background-color: #c0c0c0; 
+}
+
+.current-sub-collections span {
+  padding: 2px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: inline-block;
+  font-weight: bold;
+}
