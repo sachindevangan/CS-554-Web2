@@ -28,6 +28,8 @@ const Comic = () => {
       : false;
   };
 
+  const noSubCollectionSelected = !selectedSubCollectionId;
+
   const handleCollect = (comicId) => {
     if (!selectedSubCollectionId) {
       console.log('Please select a sub-collection before collecting comics.');
@@ -179,23 +181,25 @@ const Comic = () => {
     </dl>
     <Link to='/marvel-comics/page/1'>Back to all comics...</Link>
     <div>
-              {!isComicInSelectedSubCollection() && (
+              {!noSubCollectionSelected && !isComicInSelectedSubCollection() && (
                 <Button
                   variant="contained"
                   color="primary"
-                  onClick={() => handleCollect(comicDetails.id)}
                   sx={{ marginRight: 1 }}
+                  onClick={() => handleCollect(comicDetails.id)}
                 >
                   Collect
                 </Button>
               )}
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => handleGiveUp(comicDetails.id)}
-              >
-                Give Up
-              </Button>
+              {!noSubCollectionSelected && (
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => handleGiveUp(comicDetails.id)}
+                >
+                  Give Up
+                </Button>
+              )}
             </div>
             
   </Typography>

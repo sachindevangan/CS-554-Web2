@@ -11,7 +11,7 @@ const Home = () => {
 
 
       <div className="explore-section">
-        <h2>You can explore our comic collections bu going to the "Explore Marvel Collections" Section</h2>
+        <h2>You can explore our comic collections by going to the "Explore Marvel Collections" Section</h2>
         <p>You will find all types of comics from every issue here from rare comics to the latest one, do give it a read.</p>
         <p>You can also create your own sub-collections to keep your personalised comics together.</p>
       </div>

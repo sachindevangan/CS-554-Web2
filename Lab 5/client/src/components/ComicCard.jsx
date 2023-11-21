@@ -23,6 +23,8 @@ const ComicCard = ({ comicId ,handleCollect, handleGiveUp}) => {
       ? selectedSubCollection.collection.some((comic) => comic.id === comicId)
       : false;
   };
+
+  const noSubCollectionSelected = !selectedSubCollectionId;
  
   const titleLimit = 30;
 
@@ -112,7 +114,7 @@ const ComicCard = ({ comicId ,handleCollect, handleGiveUp}) => {
             </Typography>
             </Link>
             <div>
-            {!isComicInSelectedSubCollection() && (
+            {!noSubCollectionSelected && !isComicInSelectedSubCollection() && (
               <Button
                 variant="contained"
                 color="primary"
@@ -122,13 +124,15 @@ const ComicCard = ({ comicId ,handleCollect, handleGiveUp}) => {
                 Collect
               </Button>
             )}
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={() => handleGiveUp(comicId)}
-            >
-              Give Up
-            </Button>
+            {!noSubCollectionSelected && (
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => handleGiveUp(comicId)}
+              >
+                Give Up
+              </Button>
+            )}
           </div>
         </CardContent>
       </Card>
