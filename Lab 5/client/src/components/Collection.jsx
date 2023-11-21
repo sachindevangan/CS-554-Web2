@@ -19,6 +19,8 @@ const Collection = () => {
   const client = useApolloClient();
   const [lastPage, setLastPage] = useState(1);
 
+  const isFirstPage = currentPage === 1;
+
   const dispatch = useDispatch();
   const selectedSubCollectionId = useSelector((state) => state.subCollections.selectedSubCollectionId);
   const subCollections = useSelector((state) => state.subCollections.subCollections);
@@ -113,9 +115,11 @@ const Collection = () => {
 
       <SearchArts searchValue={handleSearch} />
       <div style={{ marginBottom: '20px' }}>
-      <button className="previous-page-btn" onClick={handlePreviousPage} disabled={currentPage === 1}>
-        Previous Page
-      </button>
+      {!isFirstPage && ( 
+        <button className="previous-page-btn" onClick={handlePreviousPage}>
+          Previous Page
+        </button>
+      )}
       <button className="next-page-btn" onClick={handleNextPage}>
     Next Page
   </button>
