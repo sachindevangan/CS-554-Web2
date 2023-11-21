@@ -96,24 +96,27 @@ const Collection = () => {
 
   return (
     <div>
-      <div>
-        <label>Select Sub-Collection:</label>
-        <select value={selectedSubCollectionId || ''} onChange={(e) => handleSubCollectionChange(e.target.value)}>
-          <option value="">Select Sub-Collection</option>
-          {subCollections.map((subCollection) => (
-            <option key={subCollection.id} value={subCollection.id}>
-              {subCollection.name}
-            </option>
-          ))}
-        </select>
-      </div>
+    <div className="select-wrapper">
+  <label htmlFor="subCollection">Select Sub-Collection:</label>
+  <select id="subCollection" value={selectedSubCollectionId || ''} onChange={(e) => handleSubCollectionChange(e.target.value)}>
+    <option value="">Select Sub-Collection</option>
+    {subCollections.map((subCollection) => (
+      <option key={subCollection.id} value={subCollection.id}>
+        {subCollection.name}
+      </option>
+    ))}
+  </select>
+</div>
+
 
       <SearchArts searchValue={handleSearch} />
       <div style={{ marginBottom: '20px' }}>
-      <button onClick={handlePreviousPage} disabled={currentPage === 1}>
+      <button className="previous-page-btn" onClick={handlePreviousPage} disabled={currentPage === 1}>
         Previous Page
       </button>
-      <button onClick={handleNextPage}>Next Page</button>
+      <button className="next-page-btn" onClick={handleNextPage}>
+    Next Page
+  </button>
       </div>
      {(comicsPageLoading || searchLoading) && (
         <div style={{ textAlign: 'center', margin: '20px' }}>
@@ -137,9 +140,9 @@ const Collection = () => {
 
       {!comicsPageLoading && !comicsPageError && (
         <div>
-        <Grid container spacing={2}>
+        <Grid container spacing={1}>
         {comics.map((comic) => (
-          <Grid key={comic.id} item xs={12} sm={6} md={4} lg={3} xl={2}>
+          <Grid key={comic.id} item xs={8} sm={2} md={3} lg={3} xl={3}>
             <ComicCard comicId={comic.id} handleCollect={handleCollect} handleGiveUp={handleGiveUp} />
           </Grid>
         ))}

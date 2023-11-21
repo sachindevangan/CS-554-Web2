@@ -18,14 +18,6 @@ const SubCollection = () => {
       return;
     }
 
-    const subCollectionExists = subCollections.some(
-      (subCollection) => subCollection.name.toLowerCase() === newSubCollectionName.toLowerCase()
-    );
-
-    if (subCollectionExists) {
-      setErrorMessage('Sub-collection with this name already exists. Please choose a unique name.');
-      return;
-    }
 
     const newSubCollection = {
       name: newSubCollectionName,
@@ -83,22 +75,25 @@ const SubCollection = () => {
           ))}
         </ul>
       </div>
-      <div>
-        <h3>Sub-Collection Comics:</h3>
-        <ul>
-          {selectedSubCollectionId &&
-            subCollections
-              .find((subCollection) => subCollection.id === selectedSubCollectionId)
-              ?.collection?.map((comicId) => (
-                <li key={comicId}>
-                  <Link to={`/marvel-comics/${comicId.id}`}>{comicId.id}</Link>
-                  <div>
-                    <button onClick={() => handleGiveUp(comicId.id)}>Give Up</button>
-                  </div>
-                </li>
-              ))}
-        </ul>
-      </div>
+      <div className="comics-list">
+  <h3>Sub-Collection Comics:</h3>
+  <ul>
+    {selectedSubCollectionId &&
+      subCollections
+        .find((subCollection) => subCollection.id === selectedSubCollectionId)
+        ?.collection?.map((comicId) => (
+          <li key={comicId}>
+            <Link to={`/marvel-comics/${comicId.id}`} className="comic-link">
+              {comicId.id} 
+            </Link>
+            <div>
+              <button onClick={() => handleGiveUp(comicId.id)} className="give-up-btn">Give Up</button>
+            </div>
+          </li>
+        ))}
+  </ul>
+</div>
+
       {errorMessage && (
         <p style={{ color: 'red', fontWeight: 'bold' }}>{errorMessage}</p>
       )}

@@ -4,7 +4,7 @@ import './Footer.css';
 const Footer = () => {
   return (
     <div className="footer">
-      <p>&copy; 2000–2023 The Metropolitan Museum of Art. All rights reserved.</p>
+      <p>&copy; 2000–2023 MARVEL. All rights reserved.</p>
     </div>
   );
 };
