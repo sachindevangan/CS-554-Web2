@@ -66,7 +66,7 @@ const ComicCard = ({ comicId ,handleCollect, handleGiveUp}) => {
           sx={{
             width: 300,
             height: 400, 
-            borderRadius: 10,
+            borderRadius: 5,
             border: '1px solid #000000',
             boxShadow: '0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22)',
             display: 'flex',

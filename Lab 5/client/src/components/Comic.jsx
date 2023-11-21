@@ -14,6 +14,17 @@ const Comic = () => {
     variables: { id },
   });
 
+  const getFormattedDate = (type) => {
+    const dateObject = comicDetails.dates?.find((date) => date.type === type);
+    return dateObject ? new Date(dateObject.date).toLocaleDateString('en-US') : 'N/A';
+  };
+
+  const getPrice = (type) => {
+    const priceObject = comicDetails.prices?.find((price) => price.type === type);
+    return priceObject ? `$${priceObject.price}` : 'N/A';
+  };
+
+
   const dispatch = useDispatch();
   const subCollections = useSelector((state) => state.subCollections.subCollections);
   const selectedSubCollectionId = useSelector((state) => state.subCollections.selectedSubCollectionId);
@@ -175,32 +186,36 @@ const Comic = () => {
         <dd>{comicDetails.collections   || 'N/A'}</dd>
       </div>
       <div>
-        <dt className='title'>prices   :</dt>
-        <dd>{comicDetails.isbn   || 'N/A'}</dd>
+        <dt className='title'>On Sale Date:</dt>
+        <dd>{getFormattedDate('onsaleDate')}</dd>
+      </div>
+      <div>
+        <dt className='title'>Print Price:</dt>
+        <dd>{getPrice('printPrice')}</dd>
       </div>
     </dl>
     <Link to='/marvel-comics/page/1'>Back to all comics...</Link>
     <div>
-              {!noSubCollectionSelected && !isComicInSelectedSubCollection() && (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  sx={{ marginRight: 1 }}
-                  onClick={() => handleCollect(comicDetails.id)}
-                >
-                  Collect
-                </Button>
-              )}
-              {!noSubCollectionSelected && (
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  onClick={() => handleGiveUp(comicDetails.id)}
-                >
-                  Give Up
-                </Button>
-              )}
-            </div>
+        {!noSubCollectionSelected && !isComicInSelectedSubCollection() && (
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{ marginRight: 1 }}
+            onClick={() => handleCollect(comicDetails.id)}
+          >
+            Collect
+          </Button>
+        )}
+        {!noSubCollectionSelected && (
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => handleGiveUp(comicDetails.id)}
+          >
+            Give Up
+          </Button>
+        )}
+      </div>
             
   </Typography>
 </CardContent>

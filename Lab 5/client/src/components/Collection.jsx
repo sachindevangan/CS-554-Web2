@@ -32,6 +32,7 @@ const Collection = () => {
     skip: !searchTerm,
   });
 
+
   useEffect(() => {
     if (!searchTerm && comicsPageData) {
       setComics(comicsPageData.comicsPage);
@@ -79,6 +80,7 @@ const Collection = () => {
   const handleSubCollectionChange = (selectedSubCollectionId) => {
     dispatch(selectSubCollection(selectedSubCollectionId));
   };
+
 
    const renderError = (error) => {
     if (error.networkError && error.networkError.result) {

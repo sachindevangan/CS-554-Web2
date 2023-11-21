@@ -165,7 +165,7 @@ searchComics: async (_, { searchTerm, pageNum }) => {
     const stringToHash = ts + privateKey + publicKey;
     const hash = md5(stringToHash);
     const baseUrl = 'https://gateway.marvel.com:443/v1/public/comics';
-    const url = `${baseUrl}?ts=${ts}&apikey=${publicKey}&hash=${hash}&titleStartsWith=${searchTerm}&offset=${offset}&limit=${pageSize}`;
+    const url = `${baseUrl}?ts=${ts}&apikey=${publicKey}&hash=${hash}&titleStartsWith=${searchTerm}&orderBy=title&offset=${offset}&limit=${pageSize}`;
 
     const response = await axios.get(url);
 
