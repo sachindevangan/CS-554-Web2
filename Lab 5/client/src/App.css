@@ -1,42 +1,223 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.App {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh; 
   }
-  to {
-    transform: rotate(360deg);
+  .content {
+	flex: 1; 
+	padding-bottom: 60px; 
   }
+
+.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+}
+.App-logo {
+	height: 90px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+
+input {
+	border: 2px solid #991818;
+	height: 10px; 
+  padding: 10px; 
+  margin: 0; 
+  margin-right: 100px;
+}
+.show-body {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+}
+
+.App-header {
+	background-color: #991818;
+	height: 200px;
+	padding: 20px;
+	color:white;
+}
+
+.App-title {
+	font-size: 1.5em;
+	font-weight: bold;
+	color: white;
+}
+
+cite {
+	font-weight: bold;
+}
+table {
+	align-content: center;
+	margin: auto;
+}
+td {
+	padding: 10px;
+}
+
+.App-intro {
+	font-size: large;
+}
+.cap-first-letter:first-letter {
+	text-transform: capitalize;
+}
+.col-sm-6,
+col-md-4 {
+	border: 1px;
+}
+
+.hometext {
+	max-width: 60%;
+}
+.showlink {
+	padding: 0.4rem 0.8rem;
+	background-color:  white!important;
+	border-radius: 3px;
+	color: #1e8678;
+	text-decoration: none !important;
+	margin: 5px;
+}
+
+.showlink:hover {
+	background-color: transparent;
+	color: white;
+	border: 2px solid white;
+}
+
+li {
+	padding: 20px;
+}
+
+p {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+div {
+	background-color:antiquewhite;
+	text-align: center;
+	margin-bottom: 0.75px;
+}
+
+a {
+	color: #000000;
+	text-decoration: none !important;
+}
+
+ul a:hover {
+	background-color: transparent;
+	color: blue;
+}
+
+ul {
+	list-style: none;
+}
+ 
+.title {
+	font-weight: bold;
+	color: #0b7532fd;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+	input {
+		font-size: 20px;
+	}
+}
+
+dt.title{
+color: #991818;
+}
+dl {
+	padding: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+dt {
+	display: inline-block;
+}
+
+dd {
+	color: #000000;
+	display: inline;
+	margin-left: 5px;
+}
+
+
+.center-button {
+	text-align: center;
+	margin-top: 20px;
+	display: flex;
+	justify-content: center; 
+	align-items: center; 
   }
+  
+  .ArtLink {
+	font-weight: bolder;
+	background-color: white;
+	color: black;
+	text-decoration: none;
+	padding: 7px 20px;
+	border-radius: 5px;
+	transition: background-color 0.3s ease;
+	margin: 0 90px; 
+  }
+  
+  .ArtLink:hover {
+	background-color: #991818;
+  }
+
+  .Marvel-Collection {
+	font-weight: bolder;
+	background-color: white;
+	color: black;
+	text-decoration: none;
+	padding: 7px 20px;
+	border-radius: 5px;
+	transition: background-color 0.3s ease;
+	margin: 0 90px; 
+  }
+
+  .Marvel-Collection:hover {
+	background-color: #991818;
+  }
+  
+  .Art-Collection {
+	font-weight: bolder;
+	background-color: white;
+	color: black;
+	text-decoration: none;
+	padding: 7px 20px;
+	border-radius: 5px;
+	transition: background-color 0.3s ease;
+	margin: 0 10px; 
+  }
+
+  .Art-Collection:hover {
+	background-color: #991818;
+  }
+  
+  body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.card {
-  padding: 2em;
+
+.background-color {
+	background-color: antiquewhite;
+  }
+  
+.description-list dt.title {
+  margin-bottom: 8px; 
 }
 
-.read-the-docs {
-  color: #888;
+.description-list dd {
+  margin-bottom: 8px 
 }
+

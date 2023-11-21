@@ -13,7 +13,7 @@ const SearchArts = (props) => {
   return (
     <form onSubmit={handleSubmit} name='formName' className='center'>
       <label style={{ fontWeight: 'bold' }}>
-        <span>Search Arts: </span>
+        <span>Search Comics: </span>
         <input autoComplete='off' type='text' name='searchTerm' />
       </label>
       <button type="submit" className='search-button'>Search</button>

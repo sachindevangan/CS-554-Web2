@@ -1,0 +1,29 @@
+.collection-page {
+    padding: 20px;
+  }
+  
+   .pagination-buttons {
+    margin-top: 20px;
+  }
+  
+  .pagination-button {
+    margin-right: 10px;
+    padding: 10px 30px;
+    background-color: #991818;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .pagination-button:hover {
+    background-color: #4b0f04;
+  }
+  
+
+
+.selected {
+  background-color: #e0e0e0; 
+}

@@ -1,6 +1,5 @@
 import { gql } from '@apollo/client';
 
-// Fetch paginated list of comics
 const GET_COMICS_PAGE = gql`
   query GetComicsPage($pageNum: Int!) {
     comicsPage(pageNum: $pageNum) {
@@ -16,31 +15,10 @@ const GET_COMICS_PAGE = gql`
   }
 `;
 
-// Fetch details of a single comic
-const GET_COMIC_DETAILS = gql`
-  query GetComicDetails($id: ID!) {
-    comic(id: $id) {
-        id
-        title
-        description
-        issueNumber
-        variantDescription
-        pageCount
-        modified
-        resourceURI
-    }
-  }
-`;
-
-// Fetch user's sub-collections and their comic collections
-const GET_USER_COLLECTIONS = gql`
-  query GetUserCollections {
-    userCollections {
+const SEARCH_COMICS = gql`
+  query SearchComics($searchTerm: String!, $pageNum: Int!) {
+    searchComics(searchTerm: $searchTerm, pageNum: $pageNum) {
       id
-      name
-      selected
-      comics {
-        id
       title
       description
       issueNumber
@@ -48,47 +26,81 @@ const GET_USER_COLLECTIONS = gql`
       pageCount
       modified
       resourceURI
+    }
+  }
+`;
+
+const GET_COMIC_DETAILS = gql`
+  query GetComicDetails($id: ID!) {
+    comic(id: $id) {
+      id
+      title
+      description
+      issueNumber
+      variantDescription
+      pageCount
+      modified
+      resourceURI
+      isbn
+      upc
+      diamondCode
+      ean
+      issn
+      format
+      dates {
+        type
+        date
+      }
+      prices {
+        type
+        price
+      }
+      thumbnail {
+        path
+        extension
+      }
+      creators {
+        available
+        returned
+        collectionURI
+        items {
+          resourceURI
+          name
+          role
+        }
+      }
+      characters {
+        available
+        returned
+        collectionURI
+        items {
+          resourceURI
+          name
+          role
+        }
+      }
+      stories {
+        available
+        returned
+        collectionURI
+        items {
+          resourceURI
+          name
+          type
+        }
+      }
+      events {
+        available
+        returned
+        collectionURI
+        items {
+          resourceURI
+          name
+        }
       }
     }
   }
 `;
 
-// Add a new sub-collection
-const ADD_SUB_COLLECTION = gql`
-  mutation AddSubCollection($name: String!) {
-    addSubCollection(name: $name) {
-      id
-      name
-    }
-  }
-`;
-
-// Select a sub-collection
-const SELECT_SUB_COLLECTION = gql`
-  mutation SelectSubCollection($subCollectionId: ID!) {
-    selectSubCollection(subCollectionId: $subCollectionId) {
-      success
-      message
-    }
-  }
-`;
-
-// Add a comic to the selected sub-collection
-const ADD_COMIC_TO_COLLECTION = gql`
-  mutation AddComicToCollection($comicId: ID!) {
-    addComicToCollection(comicId: $comicId) {
-      success
-      message
-    }
-  }
-`;
-
-
 export {
-  GET_COMICS_PAGE,
-  GET_COMIC_DETAILS,
-  GET_USER_COLLECTIONS,
-  ADD_SUB_COLLECTION,
-  SELECT_SUB_COLLECTION,
-  ADD_COMIC_TO_COLLECTION
-};
+  GET_COMICS_PAGE, GET_COMIC_DETAILS,SEARCH_COMICS};

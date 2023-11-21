@@ -1,5 +1,6 @@
 import './App.css'
 import Collection from './components/Collection'
+import SubCollection from './components/subCollections'
 import Comic from './components/Comic'
 import Home from './components/Home'
 import NotFound from './components/404'
@@ -21,11 +22,20 @@ const  App = () =>{
             <Link className='ArtLink' to='/'>
              Home Page
             </Link>
+
             <div>
             <Link className = 'Marvel-Collection' to = '/marvel-comics/page/1'> 
             Explore Marvel Collections
             </Link>
             </div>
+            
+            <div>
+            <Link className = 'Marvel-Collection' to = '/marvel-comics/collections'> 
+            My Sub-Collections
+            </Link>
+            </div>
+
+            
         </div>
 
        </header>
@@ -35,6 +45,7 @@ const  App = () =>{
         <Route path = '/' element = {<Home/>} />
         <Route path = '/marvel-comics/page/:pageNum' element = {<Collection/>} />
         <Route path = '/marvel-comics/:id' element = {<Comic/>} />
+        <Route path=  '/marvel-comics/collections' element = {<SubCollection/>} />
         <Route path='/marvel-comics/page/' element = {<NotFound/>} />
         <Route path="/404" element={<NotFound />} />
         <Route path="/400" element={<BadRequest />} />
