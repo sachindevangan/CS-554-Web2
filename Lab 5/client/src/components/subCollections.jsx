@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addSubCollection, deleteSubCollection, selectSubCollection, giveUpComic } from '../actions';
 import { Link } from 'react-router-dom';
 import './component.css';
+import { Button } from '@mui/material';
 
 const SubCollection = () => {
   const dispatch = useDispatch();
@@ -87,7 +88,14 @@ const SubCollection = () => {
               {comicId.id} 
             </Link>
             <div>
-              <button onClick={() => handleGiveUp(comicId.id)} className="give-up-btn">Give Up</button>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => handleGiveUp(comicId.id)}
+                    className="give-up-btn"
+                  >
+                    Give Up
+                  </Button>
             </div>
           </li>
         ))}

@@ -6,6 +6,7 @@ import { GET_COMIC_DETAILS } from '../queries.js';
 import noImage from '../img/download.jpeg';
 import { useDispatch, useSelector } from 'react-redux';
 import { collectComic, giveUpComic, selectSubCollection } from '../actions.js';
+import { Button } from '@mui/material';
 
 const Comic = () => {
   const { id } = useParams();
@@ -14,7 +15,18 @@ const Comic = () => {
   });
 
   const dispatch = useDispatch();
+  const subCollections = useSelector((state) => state.subCollections.subCollections);
   const selectedSubCollectionId = useSelector((state) => state.subCollections.selectedSubCollectionId);
+
+  const isComicInSelectedSubCollection = () => {
+    const selectedSubCollection = subCollections.find(
+      (subCollection) => subCollection.id === selectedSubCollectionId
+    );
+
+    return selectedSubCollection
+      ? selectedSubCollection.collection.some((comic) => comic.id === comicDetails.id)
+      : false;
+  };
 
   const handleCollect = (comicId) => {
     if (!selectedSubCollectionId) {
@@ -166,9 +178,24 @@ const Comic = () => {
       </div>
     </dl>
     <Link to='/marvel-comics/page/1'>Back to all comics...</Link>
-     <div>
-              <button onClick={() => handleCollect(comicDetails.id)}>Collect</button>
-              <button onClick={() => handleGiveUp(comicDetails.id)}>Give Up</button>
+    <div>
+              {!isComicInSelectedSubCollection() && (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => handleCollect(comicDetails.id)}
+                  sx={{ marginRight: 1 }}
+                >
+                  Collect
+                </Button>
+              )}
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => handleGiveUp(comicDetails.id)}
+              >
+                Give Up
+              </Button>
             </div>
             
   </Typography>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card, CardContent, CardMedia, Typography, Grid } from '@mui/material';
+import { Card, CardContent, CardMedia, Typography, Grid, Button } from '@mui/material';
 import { useQuery } from '@apollo/client';
 import { GET_COMIC_DETAILS } from '../queries.js';
 import noImage from '../img/download.jpeg';
@@ -14,9 +14,16 @@ const ComicCard = ({ comicId ,handleCollect, handleGiveUp}) => {
   const selectedSubCollectionId = useSelector((state) => state.subCollections.selectedSubCollectionId);
   const subCollections = useSelector((state) => state.subCollections.subCollections);
 
-  const isInSelectedSubCollection = subCollections
-    .find((subCollection) => subCollection.id === selectedSubCollectionId)
-    ?.collection.includes(comicId);
+  const isComicInSelectedSubCollection = () => {
+    const selectedSubCollection = subCollections.find(
+      (subCollection) => subCollection.id === selectedSubCollectionId
+    );
+
+    return selectedSubCollection
+      ? selectedSubCollection.collection.some((comic) => comic.id === comicId)
+      : false;
+  };
+ 
   const titleLimit = 30;
 
   if (loading) {
@@ -105,11 +112,25 @@ const ComicCard = ({ comicId ,handleCollect, handleGiveUp}) => {
             </Typography>
             </Link>
             <div>
-            <button onClick={() => handleCollect(comicId)}>Collect</button>
-            <button onClick={() => handleGiveUp(comicId)}>Give Up</button>
-            </div>
-            </CardContent>
-          
+            {!isComicInSelectedSubCollection() && (
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{ marginRight: 1 }}
+                onClick={() => handleCollect(comicId)}
+              >
+                Collect
+              </Button>
+            )}
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => handleGiveUp(comicId)}
+            >
+              Give Up
+            </Button>
+          </div>
+        </CardContent>
       </Card>
     </Grid>
   );
