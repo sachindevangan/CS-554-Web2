@@ -26,14 +26,6 @@ const collectComic = (comicId, subCollectionId) => ({
     };
  };
  
-  
-  // const addSubCollection = (subCollection) => ({
-  //   type: 'ADD_SUBCOLLECTION',
-  //   payload: {
-  //     subCollection: subCollection,
-  //   },
-  // });
-
   const addSubCollection = (subCollection) => ({
     type: 'ADD_SUBCOLLECTION',
     payload: {

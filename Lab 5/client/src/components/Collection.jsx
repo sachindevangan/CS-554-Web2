@@ -80,7 +80,6 @@ const Collection = () => {
     dispatch(selectSubCollection(selectedSubCollectionId));
   };
 
-   // Error handling and displaying status and code
    const renderError = (error) => {
     if (error.networkError && error.networkError.result) {
       const { code, status } = error.networkError.result.data || {};
@@ -128,9 +127,6 @@ const Collection = () => {
           <p>Loading...</p>
         </div>
       )}
-
-      {/* {(comicsPageError || searchError) && <p style={{ color: 'red' }}>Error: {comicsPageError?.message || searchError?.message}</p>} */}
-
       {(comicsPageError || searchError) && (
   <div style={{ color: 'red' }}>
     <p style={{ fontWeight: 'bold' }}>

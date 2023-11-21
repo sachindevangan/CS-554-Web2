@@ -1,6 +1,5 @@
-// singleComicReducer.js
 const initialState = {
-    singleComic: null, // Object to store details of a single comic
+    singleComic: null, 
   };
   
   const singleComicReducer = (state = initialState, action) => {

@@ -1,10 +1,9 @@
-// comicsReducer.js
 const initialState = {
-    comics: [], // Array to store paginated list of comics
+    comics: [], 
     currentPage: 1,
-    hasNextPage: true, // Whether there is a next page
-    hasPrevPage: false, // Whether there is a previous page
-    selectedSubCollectionId: null, // Id of the currently selected sub-collection
+    hasNextPage: true,
+    hasPrevPage: false,
+    selectedSubCollectionId: null, 
   };
   
   const comicsReducer = (state = initialState, action) => {
