@@ -118,7 +118,7 @@ const ts = new Date().getTime();
 const stringToHash = ts + privateKey + publicKey;
 const hash = md5(stringToHash);
 const baseUrl = 'https://gateway.marvel.com:443/v1/public/comics';
-const url = `${baseUrl}?ts=${ts}&apikey=${publicKey}&hash=${hash}&offset=${(pageNum - 1) * 20}&limit=20`;
+const url = `${baseUrl}?ts=${ts}&apikey=${publicKey}&hash=${hash}&orderBy=title&offset=${(pageNum - 1) * 20}&limit=20`;
 
 try {
 const response = await axios.get(url);
