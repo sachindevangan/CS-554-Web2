@@ -142,8 +142,8 @@ if (error.response) {
     extensions: { code: error.response.data.code, statusCode: error.response.status }
   });
 } else {
-  throw new GraphQLError('Internal Server Error', {
-    extensions: { code: 'INTERNAL_SERVER_ERROR' }
+  throw new GraphQLError('Page Not Found', {
+    extensions: { code: 'NOT_FOUND', statusCode: 404 }
   });
 }
 }

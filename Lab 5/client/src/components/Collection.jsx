@@ -94,7 +94,7 @@ const Collection = () => {
         );
       }
     }
-    return <p>Error: {error.message}</p>;
+    return <h1>Error: {error.message}</h1>;
   };
 
   const ITEMS_PER_PAGE = 20; 
