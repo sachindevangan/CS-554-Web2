@@ -17,7 +17,6 @@ const Collection = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(pageNum ? parseInt(pageNum) : 1); 
   const client = useApolloClient();
-  const [lastPage, setLastPage] = useState(1);
 
   const isFirstPage = currentPage === 1;
 
@@ -98,6 +97,10 @@ const Collection = () => {
     return <p>Error: {error.message}</p>;
   };
 
+  const ITEMS_PER_PAGE = 20; 
+  const [totalItemsCount, setTotalItemsCount] = useState(0);
+  const [lastPage, setLastPage] = useState(2913); 
+
   return (
     <div>
     <div className="select-wrapper">
@@ -120,9 +123,15 @@ const Collection = () => {
           Previous Page
         </button>
       )}
-      <button className="next-page-btn" onClick={handleNextPage}>
-    Next Page
-  </button>
+      {currentPage !== lastPage && (
+          <button
+            className="next-page-btn"
+            onClick={handleNextPage}
+            disabled={currentPage === lastPage}
+          >
+            Next Page
+          </button>
+        )}
       </div>
      {(comicsPageLoading || searchLoading) && (
         <div style={{ textAlign: 'center', margin: '20px' }}>
