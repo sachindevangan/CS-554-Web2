@@ -113,6 +113,8 @@
   animation-duration: 0.5s;
   animation-timing-function: ease-in-out;
   animation-fill-mode: both;
+  max-height: 60%; 
+  overflow-y: auto;
 }
 
 .modal.active {
