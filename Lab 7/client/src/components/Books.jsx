@@ -15,18 +15,25 @@ const Books = () => {
 
  
   const { loading, error, data } = useQuery(GET_BOOKS);
+  const [validationError, setValidationError] = useState('');
 
 
   const [addBook] = useMutation(ADD_BOOK, {
-    refetchQueries: [{ query: GET_BOOKS }],
+    onError: (error) => {
+      setValidationError(`Error: ${error.message}`);
+    },
   });
 
   const [editBook] = useMutation(EDIT_BOOK, {
-    refetchQueries: [{ query: GET_BOOKS }],
+     onError: (error) => {
+      setValidationError(`Error: ${error.message}`);
+    },
   });
 
   const [removeBook] = useMutation(DELETE_BOOK, {
-    refetchQueries: [{ query: GET_BOOKS }],
+    onError: (error) => {
+      setValidationError(`Error: ${error.message}`);
+    },
   });
 
 
@@ -49,9 +56,6 @@ const Books = () => {
 
   const handleCloseModal = () => {
     setShowModal(false);
-    console.log('Modal closed');
-
-    console.log('Show modal:', showModal);
     setBookData({
       id: '',
       title: '',
@@ -66,6 +70,7 @@ const Books = () => {
       format: [],
       authorId: '',
     });
+    setValidationError('');
   };
   
 
@@ -73,10 +78,6 @@ const Books = () => {
 
     setFormMode('edit');
     setShowModal(true);
-    console.log('Edit button clicked');
-
-    console.log('Show modal:', showModal);
-
     const selectedBook = data.books.find((book) => book._id === bookId);
  
     if(selectedBook){
@@ -107,7 +108,7 @@ const Books = () => {
     try {
       await removeBook({ variables: { id: bookId } });
     } catch (error) {
-      console.error('Error:', error.message);
+      setValidationError(`Error: ${error.message}`);
     }
   };
 
@@ -116,7 +117,7 @@ const Books = () => {
     try {
       console.log("bookData", bookData)
       if (!bookData.title.trim() || !bookData.genres.length || !bookData.publicationDate.trim() || !bookData.publisher.trim() || !bookData.summary.trim() || !bookData.isbn.trim() || !bookData.language.trim() || bookData.pageCount <= 0 || bookData.price <= 0 || !bookData.format.length || !bookData.authorId.trim()) {
-        console.error('Please fill in all the required fields.');
+        setValidationError(`Error: ${error.message}`);
         return;
       }
   
@@ -136,6 +137,11 @@ const Books = () => {
             authorId: bookData.authorId,
           },
         });
+
+        if (!addedBook) {
+          setValidationError('Failed to add author');
+          return;
+        }
   
         if (addedBook) {
           handleCloseModal();
@@ -159,6 +165,11 @@ const Books = () => {
             authorId: bookData.authorId,
           },
         });
+
+        if (!editedBook) {
+          setValidationError('Failed to edit author');
+          return;
+        }
   
         if (editedBook) {
           handleCloseModal();
@@ -238,6 +249,7 @@ const Books = () => {
     <button className="close-button" onClick={handleCloseModal}>Close</button>
     <h2>{formMode === 'add' ? 'Add' : 'Edit'} Book</h2>
     <form onSubmit={handleFormSubmit}>
+    {validationError && <p className="error-message">{validationError}</p>}
       <label>
         Title:
         <input

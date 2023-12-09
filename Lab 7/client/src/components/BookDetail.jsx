@@ -12,15 +12,20 @@ const BookDetails = () => {
     variables: { id },
   });
 
-  console.log('data',data)
-
+  const [validationError, setValidationError] = useState('');
 
   const [editBook] = useMutation(EDIT_BOOK, {
     refetchQueries: [{ query: GET_BOOKS }],
+    onError: (error) => {
+      setValidationError(`Error: ${error.message}`);
+    },
   });
 
   const [removeBook] = useMutation(DELETE_BOOK, {
     refetchQueries: [{ query: GET_BOOKS }],
+    onError: (error) => {
+      setValidationError(`Error: ${error.message}`);
+    },
   });
 
   const [showModal, setShowModal] = useState(false);
@@ -76,6 +81,7 @@ const BookDetails = () => {
 
   const handleCloseModal = () => {
     setShowModal(false);
+    setValidationError('');
   };
 
   const handleEditBook = async (e) => {
@@ -100,6 +106,11 @@ const BookDetails = () => {
           authorId,
         },
       });
+      
+      if (!editedBook) {
+        setValidationError('Failed to edit author');
+        return;
+      }
   
       if (editedBook) {
         setShowModal(false);
@@ -117,7 +128,7 @@ const BookDetails = () => {
       await removeBook({ variables: { id } });
       navigate('/books');
     } catch (error) {
-      console.error('Error:', error.message);
+      setValidationError(`Error: ${error.message}`);
     }
   };
 
@@ -161,6 +172,7 @@ const BookDetails = () => {
     </button>
     <h2>Edit Book</h2>
     <form onSubmit={handleEditBook}>
+    {validationError && <p className="error-message">{validationError}</p>}
     <label>
   Title:
   <input

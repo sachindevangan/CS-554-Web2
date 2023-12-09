@@ -11,16 +11,25 @@ import { useNavigate } from 'react-router-dom';
 
 const Authors = () => {
   const { loading, error, data } = useQuery(GET_AUTHORS);
-  console.log("DATA",data)
+
+  const [validationError, setValidationError] = useState('');
   
   const [addAuthor] = useMutation(ADD_AUTHOR,{
-    refetchQueries: [{ query: GET_AUTHORS }],
+    onError: (error) => {
+      setValidationError(`Error: ${error.message}`);
+    },
   });
+
   const [editAuthor] = useMutation(EDIT_AUTHOR, {
-    refetchQueries: [{ query: GET_AUTHORS }],
+   onError: (error) => {
+      setValidationError(`Error: ${error.message}`);
+    },
   });
+
   const [deleteAuthor] = useMutation(DELETE_AUTHOR, {
-    refetchQueries: [{ query: GET_AUTHORS }],
+   onError: (error) => {
+      setValidationError(`Error: ${error.message}`);
+    },
   });
 
   const navigate = useNavigate();
@@ -63,7 +72,7 @@ const Authors = () => {
     try {
       await deleteAuthor({ variables: { id: authorId } });
     } catch (error) {
-      console.error('Error:', error.message);
+      setValidationError(`Error: ${error.message}`);
     }
   };
   
@@ -78,13 +87,14 @@ const Authors = () => {
       hometownState: '',
       numOfBooks: '',
     });
+    setValidationError('');
   };
   
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
       if (!authorData.firstName.trim() || !authorData.lastName.trim()) {
-        console.error('First name and last name are required');
+        setValidationError('First name and last name are required');
         return;
       }
       
@@ -99,6 +109,11 @@ const Authors = () => {
             numOfBooks: authorData.numOfBooks,
           },
         });
+
+        if (!addedAuthor) {
+          setValidationError('Failed to add author');
+          return;
+        }
         
         if (addedAuthor) {
           handleCloseModal();
@@ -117,6 +132,11 @@ const Authors = () => {
             numOfBooks: authorData.numOfBooks,
           },
         });
+
+        if (!editedAuthor) {
+          setValidationError('Failed to edit author');
+          return;
+        }
         
         if (editedAuthor) {
           handleCloseModal();
@@ -166,6 +186,7 @@ const Authors = () => {
           </button>
           <h2>{formMode === 'add' ? 'Add' : 'Edit'} Author</h2>
           <form onSubmit={handleFormSubmit}>
+          {validationError && <p className="error-message">{validationError}</p>}
             <label>
               First Name:
               <input

@@ -193,3 +193,7 @@
   text-decoration: none;
   color: black;
 }
+
+.error-message {
+  color: red;
+}

@@ -9,17 +9,26 @@ const AuthorDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
+  const [validationError, setValidationError] = useState('');
+
   const { loading, error, data } = useQuery(GET_AUTHOR_BY_ID, {
     variables: { id },
   });
 
   const [editAuthor] = useMutation(EDIT_AUTHOR, {
     refetchQueries: [{ query: GET_AUTHORS }],
+    onError: (error) => {
+      setValidationError(`Error: ${error.message}`);
+    },
   });
 
   const [deleteAuthor] = useMutation(DELETE_AUTHOR, {
     refetchQueries: [{ query: GET_AUTHORS }],
+    onError: (error) => {
+      setValidationError(`Error: ${error.message}`);
+    },
   });
+
 
   const [showModal, setShowModal] = useState(false);
   const [authorData, setAuthorData] = useState({
@@ -62,12 +71,13 @@ const AuthorDetails = () => {
       await deleteAuthor({ variables: { id } });
       navigate('/authors');
     } catch (error) {
-      console.error('Error:', error.message);
+       setValidationError(`Error: ${error.message}`);
     }
   };
 
   const handleCloseModal = () => {
     setShowModal(false);
+    setValidationError('');
   };
 
   const handleFormSubmit = async (e) => {
@@ -87,6 +97,11 @@ const AuthorDetails = () => {
           numOfBooks,
         },
       });
+
+      if (!editedAuthor) {
+        setValidationError('Failed to edit author');
+        return;
+      }
   
       if (editedAuthor) {
         handleCloseModal();
@@ -137,6 +152,7 @@ const AuthorDetails = () => {
           <button className="close-button" onClick={handleCloseModal}>Close</button>
           <h2>Edit Author</h2>
           <form onSubmit={handleFormSubmit}>
+          {validationError && <p className="error-message">{validationError}</p>}
           <label>
               First Name:
               <input
